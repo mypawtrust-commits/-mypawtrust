@@ -12,60 +12,23 @@
         <h1 class="text-2xl font-bold text-blue-900">🐾 MyPawTrust</h1>
         <button class="bg-orange-500 text-white px-4 py-2 rounded-full font-bold">Apply to Sell</button>
     </nav>
-
-    <header class="py-12 text-center">
-        <h2 class="text-4xl font-bold text-blue-900 mb-2">Find Your Perfect Puppy</h2>
+    <header class="py-12 text-center text-blue-900">
+        <h2 class="text-4xl font-bold mb-2 text-blue-900">Find Your Perfect Puppy</h2>
         <p class="text-gray-600">Ethically Bred • Health Guaranteed • North America Wide</p>
     </header>
-
-    <main class="max-w-6xl mx-auto p-6">
+    <main class="max-w-6xl mx-auto p-6 text-center">
         <div id="pet-list" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- 宠物卡片将在这里自动生成 -->
-            <p class="col-span-full text-center">Loading pets from MyPawTrust database...</p>
+            <p class="col-span-full">Loading puppies from database...</p>
         </div>
     </main>
-
     <script>
         const SUPABASE_URL = 'https://dpnrwrvyixpditytorcf.supabase.co';
-        // 下面这行已经修正：去掉了空格，加上了结尾引号
         const SUPABASE_ANON_KEY = 'sb_publishable_-depQZkB_gomwvYWa5sYGQ_IfymhyvK';
-        
         const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
         async function getPets() {
             try {
                 const { data: pets, error } = await _supabase.from('pets').select('*');
                 const list = document.getElementById('pet-list');
-                
-                if (error) { 
-                    list.innerHTML = "Error: " + error.message; 
-                    return; 
-                }
-                
-                if (!pets || pets.length === 0) { 
-                    list.innerHTML = "No pets available today. Check back later!"; 
-                    return; 
-                }
-
+                if (error) { list.innerHTML = "Error: " + error.message; return; }
+                if (!pets || pets.length === 0) { list.innerHTML = "No puppies found in database."; return; }
                 list.innerHTML = pets.map(pet => `
-                    <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 hover:scale-105 transition-transform">
-                        <img src="${pet.image_url}" class="w-full h-64 object-cover" onerror="this.src='https://via.placeholder.com/400x300?text=Pet+Image'">
-                        <div class="p-6 text-left">
-                            <div class="flex justify-between items-center mb-2">
-                                <h4 class="text-xl font-bold">${pet.breed}</h4>
-                                <span class="text-orange-500 font-extrabold text-xl">$${pet.price}</span>
-                            </div>
-                            <p class="text-gray-500 text-sm mb-4">${pet.age} • Ready for new home</p>
-                            <button class="w-full bg-blue-900 text-white py-3 rounded-2xl font-bold hover:bg-blue-800">View Details</button>
-                        </div>
-                    </div>
-                `).join('');
-            } catch (err) {
-                console.error(err);
-                document.getElementById('pet-list').innerHTML = "Something went wrong. Please refresh.";
-            }
-        }
-        getPets();
-    </script>
-</body>
-</html>
