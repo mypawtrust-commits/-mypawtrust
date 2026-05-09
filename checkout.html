@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Escrow | MyPawTrust VIP 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,900&family=Inter:wght@400;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #010409; color: white; overflow-x: hidden; }
+        .hero-font { font-family: 'Playfair Display', serif; }
+        
+        /* 军事级脉冲边框 */
+        .secure-border {
+            position: relative;
+        }
+        .secure-border::before {
+            content: ''; position: absolute; inset: -2px; border-radius: inherit;
+            background: linear-gradient(45deg, #1e1b4b, #6366f1, #1e1b4b);
+            z-index: -1; animation: borderRotate 4s linear infinite; opacity: 0.5;
+        }
+        @keyframes borderRotate { 100% { filter: hue-rotate(360deg); } }
+    </style>
+</head>
+<body class="py-20 px-6 min-h-screen flex items-center justify-center relative">
+
+    <!-- 背景气氛组 -->
+    <div class="fixed inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')] z-0"></div>
+
+    <div class="w-full max-w-5xl relative z-10">
+        
+        <!-- 头部安全声明 -->
+        <header class="text-center mb-12">
+            <div class="inline-flex items-center gap-2 bg-emerald-950/30 border border-emerald-500/20 px-4 py-1.5 rounded-full mb-6">
+                <span class="text-emerald-400 text-sm">🔒</span>
+                <span class="text-emerald-400 text-[8px] font-black uppercase tracking-[0.3em]">256-Bit Encrypted Escrow Protocol</span>
+            </div>
+            <h1 class="text-5xl md:text-6xl font-black italic hero-font tracking-tighter uppercase text-white mb-2">Finalize Legacy.</h1>
+            <p class="text-slate-500 text-[10px] font-black tracking-[0.3em] uppercase">Binding Reservation & Vetting Agreement</p>
+        </header>
+
+        <!-- 核心双栏布局 -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- 左侧：资产回顾 (买家到底在为什么付钱) -->
+            <div class="lg:col-span-5 bg-[#080d1a] rounded-[2rem] p-8 border border-white/5 relative overflow-hidden flex flex-col justify-between">
+                <!-- 资产水印 -->
+                <div class="absolute -right-10 -top-10 text-9xl opacity-5">👑</div>
+                
+                <div>
+                    <span class="text-indigo-500 text-[9px] font-black uppercase tracking-widest mb-4 block">Asset Summary</span>
+                    <h2 class="text-4xl font-black italic hero-font text-white mb-1">Seraphina</h2>
+                    <p class="text-slate-400 text-xs font-bold tracking-widest uppercase mb-8">Pure White Odd-Eyed Persian</p>
+
+                    <div class="space-y-4 border-l-2 border-indigo-900 pl-4 mb-8">
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-slate-500 font-light">Asset Base Value</span>
+                            <span class="text-slate-300 font-black">$4,500.00</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-slate-500 font-light">White-Glove Delivery</span>
+                            <span class="text-slate-300 font-black text-[10px] uppercase tracking-widest">Calculated Post-Vetting</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-indigo-950/50 rounded-2xl p-6 border border-indigo-500/20">
+                    <p class="text-[9px] text-indigo-300 uppercase tracking-widest font-black mb-2">Today's Escrow Commitment</p>
+                    <p class="text-4xl font-black text-white">$200<span class="text-lg text-slate-500">.00</span></p>
+                    <p class="text-[8px] text-slate-400 uppercase tracking-widest mt-2 leading-relaxed">This deposit locks the asset under your name for 48 hours pending final background check. Fully refundable if registry denies application.</p>
+                </div>
+            </div>
+
+            <!-- 右侧：契约签署与支付终端 -->
+            <div class="lg:col-span-7 bg-[#05050a] rounded-[2rem] p-8 md:p-12 border-2 border-indigo-900/50 secure-border shadow-2xl">
+                
+                <h3 class="text-lg font-black text-white italic mb-8 uppercase tracking-widest">Execute Contract</h3>
+
+                <!-- 支付表单模拟 -->
+                <form class="space-y-6">
+                    <!-- 信用卡信息框 -->
+                    <div class="bg-[#020408] border border-white/10 rounded-2xl p-6 space-y-6">
+                        <div class="space-y-2">
+                            <label class="text-[9px] text-slate-500 uppercase tracking-widest font-black">Cardholder Identity</label>
+                            <input type="text" placeholder="Name on Card" class="w-full bg-transparent border-b border-white/10 py-2 text-sm text-white placeholder-slate-700 focus:outline-none focus:border-indigo-500 transition-colors">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[9px] text-slate-500 uppercase tracking-widest font-black">Secure Card Number</label>
+                            <input type="text" placeholder="•••• •••• •••• ••••" class="w-full bg-transparent border-b border-white/10 py-2 text-sm text-white placeholder-slate-700 tracking-[0.3em] focus:outline-none focus:border-indigo-500 transition-colors">
+                        </div>
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="space-y-2">
+                                <label class="text-[9px] text-slate-500 uppercase tracking-widest font-black">Expiration</label>
+                                <input type="text" placeholder="MM/YY" class="w-full bg-transparent border-b border-white/10 py-2 text-sm text-white placeholder-slate-700 tracking-widest focus:outline-none focus:border-indigo-500 transition-colors">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="text-[9px] text-slate-500 uppercase tracking-widest font-black">CVC</label>
+                                <input type="text" placeholder="•••" class="w-full bg-transparent border-b border-white/10 py-2 text-sm text-white placeholder-slate-700 tracking-widest focus:outline-none focus:border-indigo-500 transition-colors">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 法律契约勾选 -->
+                    <div class="flex items-start gap-4 pt-4">
+                        <input type="checkbox" class="mt-1 w-4 h-4 accent-indigo-600 bg-slate-900 border-white/10 cursor-pointer">
+                        <p class="text-[9px] text-slate-400 uppercase tracking-wider leading-relaxed">
+                            I verify that I am acting as the primary caretaker. I accept the MyPawTrust <a href="#" class="text-indigo-400 underline">Escrow Terms</a>. I understand this $200 is a binding intent and subjects me to the 2026 Heritage Vetting process.
+                        </p>
+                    </div>
+
+                    <!-- 致命点击按钮 -->
+                    <button type="button" onclick="alert('✅ ESCROW SECURED! \n\n$200.00 Authorized. Seraphina is locked under your profile for 48 hours. Please check your email for the Vetting Contract.'); location.href='index.html';" class="w-full bg-white text-black rounded-2xl px-6 py-6 mt-4 text-[12px] font-black uppercase tracking-[0.4em] hover:bg-indigo-600 hover:text-white transition-all shadow-[0_0_30px_rgba(255,255,255,0.1)] active:scale-95 group">
+    Authorize $200.00 Escrow 
+    <button type="button" onclick="alert('✅ ESCROW SECURED! \n\n$200.00 Authorized. Seraphina is locked under your profile for 48 hours. Please check your email for the Vetting Contract.'); location.href='index.html';" class="w-full bg-white text-black rounded-2xl px-6 py-6 mt-4 text-[12px] font-black uppercase tracking-[0.4em] hover:bg-indigo-600 hover:text-white transition-all shadow-[0_0_30px_rgba(255,255,255,0.1)] active:scale-95 group">
+    Authorize $200.00 Escrow 
+    <span class="inline-block ml-2 group-hover:translate-x-2 transition-transform">→</span>
+</button>

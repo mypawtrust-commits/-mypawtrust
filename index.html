@@ -2,78 +2,173 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyPawTrust | Premium Pet Marketplace</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- 100% 锁定北美高身价 SEO 全能标题 -->
+    <title>The Private Collection | MyPawTrust Verified Legacy 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,900&family=Inter:wght@400;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #010409; color: white; overflow-x: hidden; scroll-behavior: smooth; margin:0; }
+        .hero-font { font-family: 'Playfair Display', serif; }
+        
+        /* 1. 【中央指挥舰塔】 修复：移除硬性 grid，改为高弹性的 flex 布局，防止撑爆屏幕 */
+        .system-top { position: fixed; top: 0; width: 100%; z-index: 99999; }
+        .ann-bar { background: #1e1b4b; height: 35px; color: #fff; font-size: 8px; font-weight: 900; letter-spacing: 0.35em; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        
+        .nav-deck { 
+            background: rgba(255,255,255,0.98); backdrop-filter: blur(25px); 
+            min-height: 90px; padding: 15px 48px; 
+            display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;
+            border-bottom: 1px solid #1e293b; 
+        }
+
+        /* 修复：强制锁定图片大小，防止大狗图片撑爆屏幕 */
+        .brand-logo-img { height: 52px !important; width: 52px !important; object-fit: cover; }
+
+        .idx-link { font-size: 10px; font-weight: 900; text-transform: uppercase; color: #64748b; letter-spacing: 2px; transition: 0.3s; position: relative; padding: 4px 0; }
+        .idx-link:hover { color: #312e81; }
+        .idx-active { color: #312e81 !important; border-bottom: 3px solid #6366f1; }
+
+        /* 大门入口（无图自愈模式） */
+        .gate-portal { 
+            position: relative; height: 500px; border-radius: 4rem; overflow: hidden; 
+            border: 2px solid rgba(255,255,255,0.05); cursor: pointer; transition: 0.8s;
+            background: radial-gradient(circle at 50% 50%, #0d1117 0%, #000 100%);
+            display: flex; flex-direction: column; justify-content: flex-end; padding: 50px;
+        }
+        .gate-portal:hover { border-color: #6366f1; transform: translateY(-10px); }
+        .glow-aura { position: absolute; inset: 0; opacity: 0.3; animation: pulseGlow 6s infinite; }
+        @keyframes pulseGlow { 0%, 100% { opacity: 0.2; } 50% { opacity: 0.4; } }
+
+        .mpt-search { background: rgba(255,255,255,0.02); border: 2px solid #000; border-radius: 99px; }
+        .qa-card { background: #080d1a; padding: 40px; border-radius: 3rem; border: 1px solid #161b22; }
+    </style>
 </head>
-<body class="bg-gray-50">
-    <!-- 导航栏 -->
-    <nav class="bg-white shadow-sm p-4 flex justify-between items-center max-w-6xl mx-auto rounded-b-2xl">
-        <h1 class="text-2xl font-bold text-blue-900 font-sans tracking-tight">🐾 MyPawTrust</h1>
-        <button class="bg-orange-500 text-white px-5 py-2 rounded-full font-bold shadow-lg shadow-orange-200 hover:bg-orange-600 transition-all">Apply to Sell</button>
-    </nav>
+<body class="pt-[140px]">
 
-    <!-- 标语区 -->
-    <header class="py-12 text-center text-blue-900">
-        <h2 class="text-4xl font-extrabold mb-3 tracking-tight">Find Your Perfect Puppy</h2>
-        <p class="text-gray-500 font-medium">Ethically Bred • Health Guaranteed • North America Wide</p>
-    </header>
+    <!-- A. 【指挥官导航栈】-->
+    <div class="system-top shadow-2xl">
+        <div class="ann-bar uppercase">✨ Elite 2026 Reserved Heritage Status: Vetting Authorized Households Now 💎</div>
+        <header class="nav-deck">
+            
+            <!-- [左翼] 品牌勋章 -->
+            <div onclick="location.href='index.html'" class="flex items-center gap-4 cursor-pointer group shrink-0">
+                <!-- 【乌列尔已锁定此处尺寸，无论本地图多大，都不会越界】 -->
+                <img src="logo.png" alt="MyPawTrust Logo" class="brand-logo-img rounded-full shadow-lg border border-slate-50 transition-all group-hover:rotate-12">
+                <div class="flex flex-col text-slate-900 leading-none font-black italic">
+                    <span class="text-xl uppercase">MyPawTrust</span>
+                    <span class="text-[7px] text-indigo-500 uppercase mt-0.5 tracking-widest">Heritage Hub 2020</span>
+                </div>
+            </div>
 
-    <!-- 宠物展示区 -->
-    <main class="max-w-6xl mx-auto p-6">
-        <div id="pet-list" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- 加载状态 -->
-            <p class="col-span-full py-20 text-center text-gray-500 font-bold animate-pulse text-lg">
-                Connecting to MyPawTrust Database...
-            </p>
+            <!-- [中枢] 全能索引行 -->
+            <nav class="hidden lg:flex items-center justify-center space-x-9 shrink-0">
+                <a href="index.html" class="idx-link idx-active">Inventory</a>
+                <a href="blog.html" class="idx-link">Education</a>
+                <a href="stories.html" class="idx-link">Happy Tails</a>
+                <a href="shipping.html" class="idx-link">Shipping</a>
+                <a href="tracking.html" class="idx-link">Track</a>
+                <a href="insurance.html" class="idx-link text-indigo-950 italic underline underline-offset-4 decoration-indigo-200">Protection🛡️</a>
+            </nav>
+
+            <!-- [右翼] 成员申请闭环 -->
+            <div class="flex items-center gap-3 justify-end shrink-0">
+                <div class="text-[7px] font-bold text-slate-300 border-r pr-3 mr-1 uppercase hidden sm:block">
+                     <button class="hover:text-indigo-600 transition-colors" onclick="localStorage.setItem('lang','CN');location.reload()">CN</button> | 
+                     <button class="hover:text-indigo-600 transition-colors" onclick="localStorage.setItem('lang','EN');location.reload()">EN</button>
+                </div>
+                
+                <button onclick="location.href='registry.html'" class="bg-indigo-50 text-indigo-600 px-4 py-3 rounded-xl font-black text-[9px] uppercase border border-indigo-200 hover:bg-indigo-900 hover:text-white transition-all shadow-sm hidden sm:block">
+                    🔒 Registry Login
+                </button>
+
+                <button onclick="location.href='contact.html'" class="bg-[#020617] text-white px-7 py-3 rounded-full font-black text-[10px] uppercase shadow-2xl hover:bg-indigo-600 transition-all active:scale-90">
+                    INQUIRY
+                </button>
+            </div>
+        </header>
+    </div>
+
+    <!-- 主体内容区，确保有足够的顶部内边距 -->
+    <main class="max-w-7xl mx-auto px-6 py-10 text-center relative z-10">
+        
+        <!-- B. 搜索命令与资产宣誓 -->
+        <header class="mb-32 px-2 animate-fade-in mt-10">
+            <div class="inline-block border border-indigo-400/20 text-indigo-500 px-6 py-1.5 rounded-full text-[9px] font-black uppercase tracking-[0.5em] mb-12 italic">Vetted Portfolio Hub Status 2026.05 Verified</div>
+            <h1 class="text-6xl md:text-8xl lg:text-9xl font-black italic hero-font tracking-tighter leading-[0.9] text-white">Select Your <br><span class="text-indigo-600 underline underline-offset-[24px] decoration-white/10">Inheritance.</span></h1>
+            
+            <div class="mpt-search max-w-xl mx-auto flex items-center p-3 mt-24 shadow-2xl backdrop-blur-3xl focus-within:ring-8 focus-within:ring-indigo-600/10">
+                <input id="inp" type="text" placeholder="By US State, Breed Name, or Code..." class="flex-grow bg-transparent p-4 outline-none text-sm md:text-base font-bold text-white uppercase placeholder-slate-800 tracking-widest">
+                <button onclick="doHub()" class="bg-indigo-600 text-white w-14 h-14 rounded-full shadow-2xl active:scale-95 transition-all flex items-center justify-center text-xl">🔍</button>
+            </div>
+        </header>
+
+        <!-- C. 【顶级门厅：两极画轴板块】 - 已确认 DOM 闭合 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-40">
+            <!-- Persians Gate -->
+            <div onclick="location.href='local.html?state=Persian'" class="gate-portal group">
+                <div class="glow-aura" style="background: radial-gradient(circle, #312e81 0%, #000 70%)"></div>
+                <div class="relative z-50 text-left">
+                    <span class="text-indigo-400 text-xs font-black uppercase tracking-[0.3em] mb-4 block italic">Elite Archive</span>
+                    <h3 class="text-5xl md:text-6xl font-black italic tracking-tighter uppercase mb-2">The Persians</h3>
+                    <p class="text-slate-500 text-[10px] font-bold uppercase tracking-[0.3em] opacity-40">2020 Heritage Records Connected</p>
+                </div>
+            </div>
+
+            <!-- Shih Tzus Gate -->
+            <div onclick="location.href='local.html?state=Shih%20Tzu'" class="gate-portal group">
+                <div class="glow-aura" style="background: radial-gradient(circle, #064e3b 0%, #000 70%)"></div>
+                <div class="relative z-50 text-left lg:items-start items-end">
+                    <span class="text-emerald-400 text-xs font-black uppercase tracking-[0.3em] mb-4 block italic">Socialized Souls</span>
+                    <h3 class="text-5xl md:text-6xl font-black italic tracking-tighter uppercase mb-2">The Shih Tzus</h3>
+                    <p class="text-slate-500 text-[10px] font-bold uppercase tracking-[0.3em] opacity-40">Licensed Companion Network</p>
+                </div>
+            </div>
         </div>
+
+        <!-- D. 精英 Q&A：确保不再消失 -->
+        <section class="py-20 border-t border-white/5 space-y-32 text-left pb-40">
+             <div class="text-center mb-20"><h3 class="text-5xl md:text-8xl font-black hero-font text-white opacity-20 uppercase italic tracking-tighter">Manifesto.</h3></div>
+             
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-32">
+                <div class="qa-card border-l-[14px] border-indigo-950">
+                    <h4 class="text-lg font-black text-indigo-400 italic mb-6">Born from Florida, Since 2020.</h4>
+                    <p class="text-slate-500 text-sm font-light italic leading-loose">Established by a 70s-generation boutique network. Our registry values every pet's happiness above any bottom line.</p>
+                </div>
+                <div class="qa-card border-l-[14px] border-emerald-950">
+                    <h4 class="text-lg font-black text-emerald-400 italic mb-6 uppercase tracking-tighter">Escrow & Reservation Hub.</h4>
+                    <p class="text-slate-500 text-sm font-light leading-relaxed italic">Our $200 reservation protocol acts as a legal binding between selective owners and master breeders. Integrity secured.</p>
+                </div>
+                <div class="qa-card border-l-[14px] border-pink-900">
+                    <h4 class="text-lg font-black text-white italic mb-6 uppercase">VIP White-Glove Shipping.</h4>
+                    <p class="text-slate-400 text-sm leading-relaxed italic">Specializing in In-Cabin Authorized Flight Nanny escorts. Your legacy reaches you across all 50 States with zero cargo travel.</p>
+                </div>
+                <div class="qa-card border-l-[14px] border-indigo-700/30">
+                    <h4 class="text-lg font-black text-blue-500 italic mb-6 uppercase tracking-tighter">Selection Registry Seniority.</h4>
+                    <p class="text-slate-500 text-sm leading-relaxed italic">MPT Registry members gain early access to our most elite Chinchilla Silver litters before public market availability.</p>
+                </div>
+             </div>
+
+             <!-- 各州分中心 -->
+             <div class="flex flex-wrap justify-center gap-4 mt-20">
+                 <a href="local.html?state=Florida" class="px-6 py-4 bg-slate-950 rounded-2xl border border-white/10 text-[10px] font-black uppercase tracking-[0.3em] text-white hover:bg-white hover:text-black transition-all shadow-xl">📍 Florida Sanctuary</a>
+                 <a href="local.html?state=Texas" class="px-6 py-4 bg-slate-950 rounded-2xl border border-white/10 text-[10px] font-black uppercase tracking-[0.3em] text-white hover:bg-white hover:text-black transition-all shadow-xl">📍 Texas Region</a>
+                 <a href="local.html?state=New%20York" class="px-6 py-4 bg-slate-950 rounded-2xl border border-white/10 text-[10px] font-black uppercase tracking-[0.3em] text-white hover:bg-white hover:text-black transition-all shadow-xl">📍 NYC Precinct</a>
+             </div>
+        </section>
+
     </main>
 
     <script>
-        // --- 核心配置：已修正钥匙空格和URL ---
-        const SUPABASE_URL = 'https://dpnrwrvyixpditytorcf.supabase.co';
-        const SUPABASE_ANON_KEY = 'sb_publishable_-depQZkB_gomwvYWa5sYGQ_IfymhyvK';
-        
-        const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        async function getPets() {
-            try {
-                // 从数据库读取数据
-                const { data: pets, error } = await _supabase.from('pets').select('*');
-                const list = document.getElementById('pet-list');
-                
-                if (error) { 
-                    list.innerHTML = `<p class="col-span-full text-red-500 text-center py-10 font-bold">Database Error: ${error.message}</p>`;
-                    return; 
-                }
-                
-                if (!pets || pets.length === 0) { 
-                    list.innerHTML = `<div class="col-span-full text-center py-20 bg-white rounded-3xl shadow-inner text-gray-400 font-bold">No pets available right now. Check back soon!</div>`; 
-                    return; 
-                }
-
-                // 将数据渲染到网页上
-                list.innerHTML = pets.map(pet => `
-                    <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 hover:scale-105 transition-transform duration-300">
-                        <img src="${pet.image_url}" class="w-full h-64 object-cover" onerror="this.src='https://via.placeholder.com/400x300?text=Pet+Image'">
-                        <div class="p-6 text-left">
-                            <div class="flex justify-between items-center mb-2">
-                                <h4 class="text-xl font-bold text-blue-900 tracking-tight">${pet.breed}</h4>
-                                <span class="text-orange-500 font-black text-2xl">$${pet.price.toLocaleString()}</span>
-                            </div>
-                            <p class="text-gray-500 text-sm mb-5 font-semibold">${pet.age} • Verified Healthy</p>
-                            <button class="w-full bg-blue-900 text-white py-3 rounded-2xl font-bold shadow-lg shadow-blue-100 hover:bg-blue-800 transition-colors">View Details</button>
-                        </div>
-                    </div>
-                `).join('');
-            } catch (e) {
-                console.error("Critical Error:", e);
-                document.getElementById('pet-list').innerHTML = `<p class="col-span-full text-center py-20 text-gray-400">Please refresh your browser.</p>`;
-            }
+        function doHub() { 
+            const v = document.getElementById('inp').value; 
+            if(v) location.href=`local.html?state=${encodeURIComponent(v)}`; 
+            else alert("Registry Console: Input command needed."); 
         }
-        // 执行函数
-        getPets();
+        document.getElementById('inp').addEventListener('keypress', e => {
+            if(e.key === 'Enter') doHub();
+        });
     </script>
 </body>
 </html>
