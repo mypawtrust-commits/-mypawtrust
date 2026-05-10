@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><title>Client Inquiries | MyPawTrust Professional Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="nav-component.js"></script>
+    <style>
+        .input-boutique { background: #F1F5F9; border: none; border-radius: 1.2rem; padding: 20px; width: 100%; font-size: 14px; outline: none; }
+        .input-boutique:focus { background: white; ring: 3px solid #312e81; }
+    </style>
+</head>
+<body class="bg-[#FBFBFC] text-slate-900 pt-24 font-sans">
+
+    <main class="max-w-6xl mx-auto px-6 py-20 lg:py-32">
+        <header class="text-center mb-24">
+            <div class="inline-block bg-indigo-50 text-indigo-600 px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.4em] mb-6 italic">Direct Consultation Portal</div>
+            <h2 class="text-5xl md:text-8xl font-black text-indigo-950 tracking-tighter italic leading-none mb-6">Contact Us.</h2>
+            <p class="text-slate-400 text-lg md:text-xl font-light max-w-2xl mx-auto italic">
+                "We prioritize the care and well-being of our companions. For the most efficient response, please submit your formal application below."
+            </p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+            <!-- 左侧：信任信息 -->
+            <div class="lg:col-span-4 space-y-12">
+                <div class="space-y-8 border-l-2 border-slate-100 pl-8">
+                    <div>
+                        <h4 class="text-[9px] font-black uppercase text-indigo-400 tracking-[0.4em] mb-2">Location Hub</h4>
+                        <p class="font-bold text-slate-800 text-lg uppercase tracking-tight italic">Melbourne • Central Florida</p>
+                        <p class="text-slate-500 text-xs">Verified 2020 Heritage Site</p>
+                    </div>
+                    <div>
+                        <h4 class="text-[9px] font-black uppercase text-indigo-400 tracking-[0.4em] mb-2">Primary Response</h4>
+                        <p class="font-black text-slate-800 text-lg underline underline-offset-4 decoration-indigo-200">mypawtrust@gmail.com</p>
+                    </div>
+                    <div class="bg-indigo-900 p-8 rounded-[2.5rem] text-white shadow-2xl relative overflow-hidden">
+                        <p class="text-[11px] leading-relaxed relative z-10 font-medium italic opacity-80 uppercase tracking-widest">
+                            "To ensure our Chinchilla Silver kittens and Shih Tzu puppies receive 100% of our daily attention, our concierge team exclusively operates via digital inquiry."
+                        </p>
+                        <div class="absolute -right-6 -bottom-6 text-[120px] opacity-10 rotate-12">🐾</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右侧：精英表单 -->
+            <div class="lg:col-span-8">
+                <div class="bg-white rounded-[4rem] shadow-2xl p-10 md:p-16 border border-indigo-50">
+                    <div id="c-form" class="space-y-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <input id="c_name" type="text" placeholder="Desired Adoption Name" class="input-boutique">
+                            <input id="c_contact" type="text" placeholder="Preferred Email / Cell" class="input-boutique">
+                        </div>
+                        <select id="c_reason" class="input-boutique text-slate-500 font-black uppercase tracking-[0.1em]">
+                            <option value="New Puppy Inquiry">Join Official Waiting List</option>
+                            <option value="Logistics/Quote">Delivery & Logistics Consultation</option>
+                            <option value="Professional Partner">Breeder Partnership Application</option>
+                        </select>
+                        <textarea id="c_msg" placeholder="Tell us about the home environment you offer..." class="input-boutique h-40"></textarea>
+                        
+                        <button onclick="sendMPTDispatch()" id="subBtn" class="w-full bg-indigo-950 text-white py-6 rounded-[2rem] font-black text-sm uppercase tracking-[0.3em] shadow-xl hover:bg-indigo-600 transition-all active:scale-95">
+                            Submit Secure Application
+                        </button>
+                    </div>
+
+                    <!-- Success State -->
+                    <div id="c-ok" class="hidden text-center py-20">
+                        <div class="text-6xl mb-8 animate-pulse">🏛️</div>
+                        <h4 class="text-3xl font-black text-indigo-950 tracking-tighter">Under Audit.</h4>
+                        <p class="text-slate-400 mt-6 text-sm uppercase font-black tracking-widest leading-loose max-w-sm mx-auto">
+                            Thank you for your patience. Your credentials have been received and sent to the lead specialist. We respond within 24 business hours.
+                        </p>
+                        <button onclick="location.href='index.html'" class="mt-12 text-indigo-600 font-bold border-b-2 border-indigo-600 pb-1">MARKETPLACE EXIT →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const PROJECT_ID = 'dpnrwrvyixpditytorcf';
+        const supabaseUrl = `https://${PROJECT_ID}.supabase.co`;
+        const supabaseKey = 'sb_publishable_-depQZkB_gomwvYWa5sYGQ_IfymhyvK';
+        const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        async function sendMPTDispatch() {
+            const btn = document.getElementById('subBtn');
+            const data = {
+                buyer_name: document.getElementById('c_name').value,
+                buyer_contact: document.getElementById('c_contact').value,
+                status: 'Website Lead: ' + document.getElementById('c_reason').value,
+                referral_source: document.getElementById('c_msg').value
+            };
+            if(!data.buyer_name || !data.buyer_contact) return alert("❌ All identity fields must be complete.");
+            btn.disabled = true; btn.innerText = "AUTHENTICATING...";
+            try {
+                const { error } = await _supabase.from('orders').insert([data]);
+                if(error) throw error;
+                document.getElementById('c-form').classList.add('hidden');
+                document.getElementById('c-ok').classList.remove('hidden');
+            } catch(e) { alert(e.message); btn.disabled = false; }
+        }
+    </script>
+</body>
+</html>

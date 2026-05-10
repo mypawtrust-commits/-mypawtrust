@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curated Picks | MyPawTrust Care</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="nav-component.js"></script>
+    <style>
+        .kit-item { background: white; border-radius: 2.5rem; overflow: hidden; border: 1px solid #f1f5f9; display: flex; flex-direction: column; transition: 0.5s; }
+        .kit-item:hover { transform: translateY(-12px); box-shadow: 0 40px 60px -20px rgba(49, 46, 129, 0.1); }
+        .mpt-link { background: #1e1b4b; color: white; border-radius: 1rem; text-align: center; padding: 20px; font-weight: 900; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; }
+        .mpt-link:hover { background: #4338ca; }
+    </style>
+</head>
+<body class="bg-[#F8FAFC] text-slate-900 pt-20">
+
+    <main class="max-w-7xl mx-auto px-6 py-20 lg:py-32">
+        <header class="text-center mb-24">
+            <h2 class="text-5xl md:text-8xl font-black text-indigo-950 italic tracking-tighter mb-4 leading-none">The Payout Kits.</h2>
+            <p class="text-slate-400 font-bold uppercase text-[10px] tracking-[0.5em] underline decoration-indigo-200">Heritage Nutrition & Tools Registry</p>
+        </header>
+
+        <div id="care-matrix" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-40">
+             <!-- 内容将在此自动展现 -->
+             <p class="col-span-full text-center py-20 text-slate-400 font-bold italic animate-pulse">Establishing Commercial Connection...</p>
+        </div>
+    </main>
+
+    <script>
+        const supabaseUrl = 'https://dpnrwrvyixpditytorcf.supabase.co';
+        const supabaseKey = 'sb_publishable_-depQZkB_gomwvYWa5sYGQ_IfymhyvK';
+        const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        async function igniteAssets() {
+            const { data } = await _supabase.from('recommended_products').select('*').order('id', {ascending:false});
+            if(data) {
+                document.getElementById('care-matrix').innerHTML = data.map(k => `
+                    <div class="kit-item shadow-sm">
+                        <div class="bg-white p-8 aspect-square flex items-center justify-center">
+                            <img src="${k.product_image || 'https://via.placeholder.com/400'}" class="max-h-full object-contain mix-blend-multiply transition-all group-hover:scale-105" crossorigin="anonymous">
+                        </div>
+                        <div class="p-8 flex-grow flex flex-col justify-between">
+                            <div class="text-center">
+                                <span class="bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-widest">${k.target_age || 'Registry Item'}</span>
+                                <h4 class="text-lg font-black text-slate-950 mt-4 leading-tight">${k.product_name}</h4>
+                                <p class="text-[11px] text-slate-500 font-bold italic mt-4 mb-8">"${k.expert_advice}"</p>
+                            </div>
+                            
+                            <!-- 【极致关键点】：用原生 HTML <a> 标签链接，它是所有移动端唯一绝对稳定的通钱方案 -->
+                            <a href="${k.affiliate_link}" target="_blank" rel="noopener noreferrer" class="mpt-link">Verify & Check Price →</a>
+                        </div>
+                    </div>`).join('');
+            }
+        }
+        window.onload = igniteAssets;
+    </script>
+</body>
+</html>

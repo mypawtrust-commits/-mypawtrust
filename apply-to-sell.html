@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><title>Breeder Partnerships | Join MyPawTrust Network</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- 全站统一中枢：导航栏自动注入 -->
+    <script src="nav-component.js"></script>
+    <style>
+        .partner-card { background: white; border-radius: 3rem; border: 1px solid #f1f5f9; padding: 40px; transition: 0.5s; }
+        .input-boutique { background: #F1F5F9; border: none; border-radius: 1.2rem; padding: 18px; width: 100%; font-size: 14px; outline: none; }
+        .input-boutique:focus { background: white; ring: 3px solid #4338ca; }
+    </style>
+</head>
+<body class="bg-[#FBFBFC] text-slate-900 pt-20 font-sans">
+
+    <main class="max-w-5xl mx-auto px-6 py-20 lg:py-32">
+        <header class="text-center mb-24">
+            <div class="inline-block bg-indigo-50 text-indigo-600 px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.4em] mb-8 border border-indigo-100">Boutique Partnership Invitation</div>
+            <h2 class="text-5xl md:text-8xl font-black text-indigo-950 tracking-tighter italic mb-8 leading-none">Scale Your <br>Breeding Legacy.</h2>
+            <p class="text-slate-400 text-lg md:text-xl font-light max-w-2xl mx-auto leading-relaxed">
+                "Stop fighting the noise. Join the 2020 Heritage network. Let us provide the platform, the trust, and the elite clientele your pets deserve."
+            </p>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
+            <!-- 卖点 1: 流量优势 -->
+            <div class="partner-card shadow-sm hover:shadow-2xl">
+                <div class="text-3xl mb-6 text-indigo-600">🏛️</div>
+                <h4 class="font-black text-xs uppercase tracking-widest text-slate-400 mb-4">Authority</h4>
+                <p class="font-bold text-slate-800 leading-snug">Access the MPT SEO Matrix to reach buyers in all 50 States.</p>
+            </div>
+            <!-- 卖点 2: 安全保障 -->
+            <div class="partner-card shadow-sm hover:shadow-2xl">
+                <div class="text-3xl mb-6 text-indigo-600">🛡️</div>
+                <h4 class="font-black text-xs uppercase tracking-widest text-slate-400 mb-4">Integrity</h4>
+                <p class="font-bold text-slate-800 leading-snug">Every buyer is screened. Every payment is secure through our escrow link.</p>
+            </div>
+            <!-- 卖点 3: 零成本展示 -->
+            <div class="partner-card shadow-sm hover:shadow-2xl">
+                <div class="text-3xl mb-6 text-indigo-600">💎</div>
+                <h4 class="font-black text-xs uppercase tracking-widest text-slate-400 mb-4">Prestigious Fee</h4>
+                <p class="font-bold text-slate-800 leading-snug">Zero listing fees. We only win when you place a companion in a forever home.</p>
+            </div>
+        </div>
+
+        <!-- 申请表单 -->
+        <section class="bg-white rounded-[4rem] shadow-2xl p-8 md:p-20 border border-slate-100 relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-indigo-500 to-blue-900"></div>
+            <h3 class="text-3xl font-black italic mb-10 text-indigo-950">Credential Submission Terminal</h3>
+            
+            <div class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input id="s_biz" type="text" placeholder="Boutique / Kennel Name" class="input-boutique">
+                    <input id="s_owner" type="text" placeholder="Owner Full Name" class="input-boutique">
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input id="s_email" type="email" placeholder="Professional Email" class="input-boutique">
+                    <input id="s_phone" type="text" placeholder="Direct Contact / WhatsApp" class="input-boutique">
+                </div>
+                <input id="s_loc" type="text" placeholder="State & Primary City" class="input-boutique">
+                
+                <textarea id="s_bio" placeholder="Tell us about your breeding journey since inception. Describe your genetic testing & health protocols..." class="input-boutique h-40"></textarea>
+
+                <div class="flex items-center gap-6 p-6 bg-slate-50 rounded-3xl border border-dashed border-slate-200">
+                    <div class="flex-grow text-xs font-black uppercase text-slate-400 tracking-widest ml-4">License / Facility Photos (ZIP or PDF)</div>
+                    <button class="bg-indigo-600 text-white px-8 py-3 rounded-xl font-bold text-[10px] uppercase">Attach Verification</button>
+                </div>
+
+                <button onclick="handlePartnerApply()" id="btnApp" class="w-full bg-indigo-950 text-white py-6 rounded-[2.5rem] font-black text-sm uppercase tracking-[0.3em] shadow-xl hover:scale-[1.01] hover:bg-indigo-700 transition-all">
+                    Initiate Security Vetting
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-white py-12 text-center text-[9px] font-black uppercase text-slate-300 tracking-[0.5em]">
+        MyPawTrust Partner Command Protocol • Authorized Usage Only
+    </footer>
+
+    <script>
+        const PROJECT_ID = 'dpnrwrvyixpditytorcf';
+        const supabaseUrl = `https://${PROJECT_ID}.supabase.co`;
+        const supabaseKey = 'sb_publishable_-depQZkB_gomwvYWa5sYGQ_IfymhyvK';
+        const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        async function handlePartnerApply() {
+            const btn = document.getElementById('btnApp');
+            const data = {
+                business_name: document.getElementById('s_biz').value,
+                contact_name: document.getElementById('s_owner').value,
+                email: document.getElementById('s_email').value,
+                phone: document.getElementById('s_phone').value,
+                location: document.getElementById('s_loc').value,
+                experience_years: document.getElementById('s_bio').value,
+                status: 'Under Vetting'
+            };
+
+            if(!data.business_name || !data.email) return alert("❌ MISSION DATA REQUIRED: We cannot verify an anonymous entity.");
+            btn.disabled = true; btn.innerText = "AUTHENTICATING...";
+
+            const { error } = await _supabase.from('seller_applications').insert([data]);
+            if(!error) {
+                alert("✨ REGISTRATION RECEIVED: The MPT compliance team will audit your request within 48 business hours. Welcome to the Tier 1 elite.");
+                location.href='index.html';
+            } else { alert(error.message); btn.disabled = false; }
+        }
+    </script>
+</body>
+</html>

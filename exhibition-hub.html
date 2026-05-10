@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><title>Elite Registry | Exhibition Schedule</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="nav-component.js"></script>
+    <style>
+        .event-card { background: white; border-radius: 2rem; border-left: 8px solid #312e81; padding: 25px; transition: 0.4s; }
+        .event-card:hover { transform: translateX(10px); background: #fdfcfb; }
+    </style>
+</head>
+<body class="bg-[#F8FAFC] text-slate-900 pt-24 font-sans">
+    <main class="max-w-4xl mx-auto px-6 py-20">
+        <header class="text-center mb-16">
+            <span class="text-[9px] font-black uppercase text-indigo-500 tracking-[0.4em] mb-4 block">Official 2026 Season</span>
+            <h2 class="text-5xl font-black italic tracking-tighter">Boutique Show Calendar</h2>
+            <p class="text-slate-500 mt-4 text-sm font-light">"Where show-quality lineages meet the elite network."</p>
+        </header>
+
+        <div id="events-grid" class="space-y-6 pb-40">
+             <!-- 后台录入的 AKC / CFA 展会会自动加载在此 -->
+        </div>
+
+        <section class="mt-20 p-12 bg-[#020617] rounded-[3rem] text-white text-center">
+            <h4 class="text-xl font-bold italic mb-4">Planning to Show Your Current Litter?</h4>
+            <p class="text-slate-400 text-xs mb-8 italic">Verified MPT Partners get premium badge display for pets with a competition heritage.</p>
+            <button onclick="location.href='apply-to-sell.html'" class="bg-indigo-600 px-10 py-4 rounded-2xl font-black uppercase text-[9px] tracking-widest hover:bg-white hover:text-indigo-900 transition-all">Submit Entry Application</button>
+        </section>
+    </main>
+
+    <script>
+        const _supabase = supabase.createClient('https://dpnrwrvyixpditytorcf.supabase.co', 'sb_publishable_-depQZkB_gomwvYWa5sYGQ_IfymhyvK');
+        async function loadEvents() {
+            const { data } = await _supabase.from('mpt_exhibitions').select('*').order('event_date', {ascending:true});
+            if(data) {
+                document.getElementById('events-grid').innerHTML = data.map(ev => `
+                    <div class="event-card shadow-sm group">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="text-[9px] font-black text-indigo-400 uppercase tracking-widest">${ev.association_type || 'GLOBAL EVENT'}</span>
+                                <h3 class="text-2xl font-black text-indigo-950 mt-1 uppercase italic">${ev.event_name}</h3>
+                                <p class="text-slate-500 font-bold mt-2">📍 ${ev.location_city_state}</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="text-[8px] font-black text-slate-300 uppercase">Commencing:</p>
+                                <p class="text-lg font-black text-indigo-600">${new Date(ev.event_date).toLocaleDateString()}</p>
+                            </div>
+                        </div>
+                    </div>`).join('');
+            }
+        }
+        window.onload = loadEvents;
+    </script>
+</body>
+</html>
+</html>

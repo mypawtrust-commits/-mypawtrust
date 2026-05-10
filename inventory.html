@@ -5,15 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elite Inventory | MyPawTrust 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,900&family=Inter:wght@400;700;900&display=swap');
         body { font-family: 'Inter', sans-serif; background-color: #010409; color: white; overflow-x: hidden; }
         .hero-font { font-family: 'Playfair Display', serif; }
+        .loader { border: 4px solid rgba(255,255,255,0.1); border-left-color: #3b82f6; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 50px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body class="pb-32">
 
-    <!-- 顶部极简导航 (返回主基地) -->
+    <!-- 顶部导航 -->
     <nav class="p-8 border-b border-white/5 flex justify-between items-center bg-black/50 backdrop-blur-md sticky top-0 z-50">
         <div onclick="location.href='index.html'" class="flex items-center gap-3 cursor-pointer group hover:opacity-80 transition-all">
             <span class="text-2xl">🔙</span>
@@ -22,121 +25,149 @@
                 <p class="text-[8px] text-indigo-500 uppercase tracking-[0.3em]">Return to Hub</p>
             </div>
         </div>
-        <div class="text-[9px] font-black uppercase tracking-[0.3em] text-slate-500 border border-slate-800 px-4 py-2 rounded-full">
-            Live Asset Matrix
+        <div class="text-[9px] font-black uppercase tracking-[0.3em] text-emerald-500 border border-emerald-900 px-4 py-2 rounded-full flex items-center gap-2">
+            <div class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div> Live Database Synced
         </div>
     </nav>
 
     <main class="max-w-[1400px] mx-auto px-6 py-16">
         
-        <!-- 页面标题与筛选器 -->
         <header class="mb-16 flex flex-col md:flex-row justify-between items-end gap-8">
             <div>
                 <span class="text-indigo-500 text-[10px] font-black uppercase tracking-[0.4em] mb-4 block italic">Verified Portfolio 2026</span>
                 <h2 class="text-5xl md:text-7xl font-black italic hero-font tracking-tighter uppercase">The Archive.</h2>
             </div>
-            
-            <!-- 资产筛选雷达 -->
-            <div class="flex gap-2 flex-wrap">
-                <button class="bg-white text-black px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest shadow-[0_0_15px_rgba(255,255,255,0.3)]">All Assets</button>
-                <button class="bg-transparent border border-white/20 text-slate-400 px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest hover:border-indigo-500 hover:text-white transition-all">Persians</button>
-                <button class="bg-transparent border border-white/20 text-slate-400 px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-widest hover:border-emerald-500 hover:text-white transition-all">Shih Tzus</button>
-            </div>
         </header>
 
-        <!-- 🔥 核心矩阵：网格布局开始 -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-            <!-- 【卡片 1：异瞳波斯猫 (已激活传送门)】 -->
-            <div class="relative rounded-[2rem] bg-[#080d1a] border-2 border-blue-600/40 overflow-hidden shadow-[0_0_30px_rgba(37,99,235,0.15)] group hover:border-blue-400 transition-all duration-500">
-                <div class="bg-blue-950/80 border-b border-blue-500/20 px-6 py-3 flex justify-between items-center">
-                    <span class="text-blue-300 text-[8px] font-black tracking-[0.3em] uppercase">01. Inventory Deployment</span>
-                    <div class="flex items-center gap-2">
-                        <span class="text-emerald-400 text-[7px] font-bold tracking-widest uppercase">Live</span>
-                        <div class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34d399]"></div>
-                    </div>
-                </div>
-                <div class="h-64 w-full bg-gradient-to-b from-blue-900/40 to-[#080d1a] relative flex items-center justify-center">
-                    <div class="absolute top-4 left-4 z-20 flex gap-2"><span class="bg-blue-600 text-white text-[8px] font-black uppercase tracking-widest px-3 py-1 rounded-full">Odd-Eyed</span></div>
-                    <span class="text-blue-400/30 text-sm font-black tracking-[0.4em] uppercase rotate-[-10deg]">Image Awaiting</span>
-                </div>
-                <div class="p-8 relative">
-                    <h4 class="text-3xl font-black italic hero-font text-white mb-2">Seraphina</h4>
-                    <p class="text-blue-400 text-[10px] font-bold tracking-[0.2em] uppercase mb-4">Pure White Heritage Persian</p>
-                    <ul class="space-y-2.5 mb-6 border-t border-white/5 pt-5">
-                        <li class="flex items-center text-slate-200 text-xs font-black tracking-wide bg-blue-900/20 p-2 rounded-lg border border-blue-500/20">📅 DOB: Oct 15, 2023</li>
-                        <li class="flex items-center text-slate-400 text-xs"><span class="w-2 h-2 rounded-full bg-blue-500 mr-3 shadow-[0_0_8px_#3b82f6]"></span> Left Eye: Sapphire Blue</li>
-                        <li class="flex items-center text-slate-400 text-xs"><span class="w-2 h-2 rounded-full bg-amber-500 mr-3 shadow-[0_0_8px_#f59e0b]"></span> Right Eye: Amber Gold</li>
-                        <li class="flex items-center text-slate-400 text-xs">📍 Location: Florida Sanctuary</li>
-                    </ul>
-                    <div class="flex items-center justify-between mt-6 pt-4 border-t border-white/5">
-                        <div class="flex flex-col"><span class="text-slate-500 text-[9px] uppercase tracking-widest">Escrow</span><span class="text-white font-black text-xl">$200.00</span></div>
-                        <!-- 👇 这里加上了跳转指令 👇 -->
-                        <button onclick="location.href='registry.html'" class="bg-blue-600 text-white px-5 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-blue-900 transition-all active:scale-95">Secure Now</button>
-                    </div>
-                </div>
+        <!-- 展厅的空架子 -->
+        <div id="inventory-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="col-span-full text-center">
+                <div class="loader"></div>
+                <p class="text-slate-500 text-xs tracking-widest uppercase mt-4">Syncing with Imperial Vault...</p>
             </div>
-
-            <!-- 【卡片 2：帝国西施犬 (已激活传送门)】 -->
-            <div class="relative rounded-[2rem] bg-[#080d1a] border-2 border-emerald-600/30 overflow-hidden group hover:border-emerald-400 transition-all duration-500">
-                <div class="bg-emerald-950/50 border-b border-emerald-500/20 px-6 py-3 flex justify-between items-center">
-                    <span class="text-emerald-500 text-[8px] font-black tracking-[0.3em] uppercase">02. Inventory Deployment</span>
-                    <div class="flex items-center gap-2">
-                        <span class="text-emerald-400 text-[7px] font-bold tracking-widest uppercase">Live</span>
-                        <div class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34d399]"></div>
-                    </div>
-                </div>
-                <div class="h-64 w-full bg-gradient-to-b from-emerald-900/20 to-[#080d1a] relative flex items-center justify-center">
-                    <div class="absolute top-4 left-4 z-20 flex gap-2"><span class="bg-emerald-700 text-white text-[8px] font-black uppercase tracking-widest px-3 py-1 rounded-full">Imperial Line</span></div>
-                    <span class="text-emerald-400/20 text-sm font-black tracking-[0.4em] uppercase rotate-[-10deg]">Image Awaiting</span>
-                </div>
-                <div class="p-8 relative">
-                    <h4 class="text-3xl font-black italic hero-font text-white mb-2">Winston</h4>
-                    <p class="text-emerald-500 text-[10px] font-bold tracking-[0.2em] uppercase mb-4">Gold & White Shih Tzu</p>
-                    <ul class="space-y-2.5 mb-6 border-t border-white/5 pt-5">
-                        <li class="flex items-center text-slate-200 text-xs font-black tracking-wide bg-emerald-900/20 p-2 rounded-lg border border-emerald-500/20">📅 DOB: Dec 02, 2023</li>
-                        <li class="flex items-center text-slate-400 text-xs"><span class="w-2 h-2 rounded-full bg-slate-100 mr-3"></span> Coat: Silk Gold/White</li>
-                        <li class="flex items-center text-slate-400 text-xs"><span class="w-2 h-2 rounded-full bg-emerald-500 mr-3"></span> Temperament: Royal Calm</li>
-                        <li class="flex items-center text-slate-400 text-xs">📍 Location: Texas Region</li>
-                    </ul>
-                    <div class="flex items-center justify-between mt-6 pt-4 border-t border-white/5">
-                        <div class="flex flex-col"><span class="text-slate-500 text-[9px] uppercase tracking-widest">Escrow</span><span class="text-white font-black text-xl">$200.00</span></div>
-                        <!-- 👇 这里加上了跳转指令 👇 -->
-                        <button onclick="location.href='registry.html'" class="bg-emerald-700 text-white px-5 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-emerald-900 transition-all active:scale-95">Secure Now</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 【卡片 3：银色金吉拉 (保持 Unavailable 状态)】 -->
-            <div class="relative rounded-[2rem] bg-[#05050a] border-2 border-white/5 overflow-hidden group opacity-70 hover:opacity-100 transition-all duration-500">
-                <div class="bg-purple-950/30 border-b border-purple-500/10 px-6 py-3 flex justify-between items-center">
-                    <span class="text-slate-500 text-[8px] font-black tracking-[0.3em] uppercase">03. Inventory Deployment</span>
-                    <div class="flex items-center gap-2">
-                        <span class="text-red-500 text-[7px] font-bold tracking-widest uppercase">Reserved</span>
-                        <div class="w-1.5 h-1.5 rounded-full bg-red-500 shadow-[0_0_8px_#ef4444]"></div>
-                    </div>
-                </div>
-                <div class="h-64 w-full bg-gradient-to-b from-purple-900/10 to-[#05050a] relative flex items-center justify-center grayscale">
-                    <div class="absolute top-4 left-4 z-20 flex gap-2"><span class="bg-slate-800 text-slate-400 border border-slate-600 text-[8px] font-black uppercase tracking-widest px-3 py-1 rounded-full">Chinchilla Silver</span></div>
-                    <span class="text-slate-600/30 text-sm font-black tracking-[0.4em] uppercase rotate-[-10deg]">Image Awaiting</span>
-                </div>
-                <div class="p-8 relative">
-                    <h4 class="text-3xl font-black italic hero-font text-slate-400 mb-2">Luna</h4>
-                    <p class="text-purple-500 text-[10px] font-bold tracking-[0.2em] uppercase mb-4">Silver Heritage Persian</p>
-                    <ul class="space-y-2.5 mb-6 border-t border-white/5 pt-5 opacity-60">
-                        <li class="flex items-center text-slate-400 text-xs font-black tracking-wide bg-slate-900 p-2 rounded-lg border border-white/5">📅 DOB: Jan 10, 2024</li>
-                        <li class="flex items-center text-slate-500 text-xs">📍 Location: NYC Precinct</li>
-                    </ul>
-                    <div class="flex items-center justify-between mt-6 pt-4 border-t border-white/5">
-                        <div class="flex flex-col"><span class="text-slate-600 text-[9px] uppercase tracking-widest">Status</span><span class="text-red-500 font-black text-xl italic">Escrow Locked</span></div>
-                        <!-- 👇 这个按钮不动它，保持灰色不可点 👇 -->
-                        <button class="bg-transparent border border-slate-700 text-slate-500 px-5 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest cursor-not-allowed">Unavailable</button>
-                    </div>
-                </div>
-            </div>
-
         </div>
+
     </main>
 
+    <!-- 🚨 极其奢华的全屏放大镜 Modal 🚨 -->
+    <div id="image-modal" onclick="closeModal()" class="fixed inset-0 z-[99999] bg-black/95 hidden flex flex-col items-center justify-center p-4 cursor-zoom-out transition-all duration-300 backdrop-blur-sm">
+        <span class="absolute top-10 right-10 text-white text-5xl font-light cursor-pointer hover:text-red-500 transition-colors">&times;</span>
+        <img id="modal-img" src="" class="max-w-full max-h-[85vh] object-contain rounded-2xl shadow-[0_0_80px_rgba(255,255,255,0.1)]">
+        <p class="text-slate-500 text-[10px] font-black tracking-[0.5em] uppercase mt-8 italic">Verified Asset View</p>
+    </div>
+
+    <script>
+        const PROJECT_ID = 'dpnrwrvyixpditytorcf';
+        const supabaseUrl = `https://${PROJECT_ID}.supabase.co`;
+        const supabaseKey = 'sb_publishable_-depQZkB_gomwvYWa5sYGQ_IfymhyvK';
+        const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        // 放大镜开关控制
+        function openModal(imgSrc) {
+            document.getElementById('modal-img').src = imgSrc;
+            document.getElementById('image-modal').classList.remove('hidden');
+        }
+        function closeModal() {
+            document.getElementById('image-modal').classList.add('hidden');
+        }
+
+        async function fetchLiveAssets() {
+            try {
+                const { data: pets, error } = await _supabase.from('pets').select('*').order('created_at', { ascending: false });
+                if (error) throw error;
+
+                const container = document.getElementById('inventory-grid');
+                let htmlContent = '';
+
+                if (pets && pets.length > 0) {
+                    pets.forEach((pet, index) => {
+                        const formattedPrice = pet.price ? pet.price.toLocaleString() : 'TBD';
+                        const imgSrc = pet.image_url_1 ? pet.image_url_1 : 'cat.png';
+
+                        htmlContent += `
+                        <div class="relative rounded-[2rem] bg-[#080d1a] border-2 border-blue-600/40 overflow-hidden shadow-[0_0_30px_rgba(37,99,235,0.15)] group hover:border-blue-400 transition-all duration-500">
+                            <div class="bg-blue-950/80 border-b border-blue-500/20 px-6 py-3 flex justify-between items-center">
+                                <span class="text-blue-300 text-[8px] font-black tracking-[0.3em] uppercase">0${index + 1}. Live Deployment</span>
+                                <div class="flex items-center gap-2"><span class="text-emerald-400 text-[7px] font-bold tracking-widest uppercase">Live</span><div class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34d399]"></div></div>
+                            </div>
+                            
+                            <!-- 📸 图片增加了 onclick 放大指令 和 cursor-zoom-in (放大镜鼠标) -->
+                            <div class="h-64 w-full bg-gradient-to-b from-blue-900/40 to-[#080d1a] relative flex items-center justify-center overflow-hidden">
+                                <div class="absolute top-4 left-4 z-20 flex gap-2"><span class="bg-blue-600 text-white text-[8px] font-black uppercase tracking-widest px-3 py-1 rounded-full shadow-lg">Verified Asset</span></div>
+                                <img onclick="openModal('${imgSrc}')" src="${imgSrc}" class="w-full h-full object-contain opacity-90 group-hover:scale-110 group-hover:opacity-100 transition-all duration-700 cursor-zoom-in">
+                            </div>
+                            
+                            <div class="p-8 relative">
+                                <div class="absolute -top-6 right-6 bg-slate-900 border border-blue-400/30 w-12 h-12 rounded-full flex items-center justify-center text-xl shadow-xl z-30">👑</div>
+                                <h4 class="text-3xl font-black italic hero-font text-white mb-2">${pet.breed || 'Elite Asset'}</h4>
+                                <p class="text-blue-400 text-[10px] font-bold tracking-[0.2em] uppercase mb-4">${pet.gender || 'Unknown'} | ${pet.breeder_location || 'Classified Location'}</p>
+                                <ul class="space-y-2.5 mb-6 border-t border-white/5 pt-5">
+                                    <li class="flex items-center text-slate-200 text-xs font-black tracking-wide bg-blue-900/20 p-2 rounded-lg border border-blue-500/20">📅 Born: ${pet.birth_date || 'Unknown'}</li>
+                                    <li class="flex text-slate-400 text-xs leading-relaxed"><span class="w-2 h-2 rounded-full bg-blue-500 mr-3 mt-1 shrink-0"></span> ${pet.description || 'Premium heritage bloodline.'}</li>
+                                </ul>
+                                <div class="flex items-center justify-between mt-6 pt-4 border-t border-white/5">
+                                    <div class="flex flex-col"><span class="text-slate-500 text-[9px] uppercase tracking-widest">Asset Value</span><span class="text-white font-black text-xl">$${formattedPrice}</span></div>
+                                    <button onclick="location.href='registry.html'" class="bg-blue-600 text-white px-5 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-blue-900 transition-all active:scale-95 shadow-lg">Secure Now</button>
+                                </div>
+                            </div>
+                        </div>
+                        `;
+                    });
+                }
+
+                htmlContent += `
+                <div class="relative rounded-[2rem] bg-[#080d1a] border-2 border-emerald-600/30 overflow-hidden group hover:border-emerald-400 transition-all duration-500">
+                    <div class="bg-emerald-950/50 border-b border-emerald-500/20 px-6 py-3 flex justify-between items-center">
+                        <span class="text-emerald-500 text-[8px] font-black tracking-[0.3em] uppercase">VIP Deployment</span>
+                        <div class="flex items-center gap-2"><span class="text-emerald-400 text-[7px] font-bold tracking-widest uppercase">Live</span><div class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></div></div>
+                    </div>
+                    
+                    <!-- 📸 西施犬也加上了点击放大 -->
+                    <div class="h-64 w-full relative flex items-center justify-center overflow-hidden">
+                        <div class="absolute top-4 left-4 z-20"><span class="bg-emerald-700 text-white text-[8px] font-black uppercase tracking-widest px-3 py-1 rounded-full">Imperial Line</span></div>
+                        <img onclick="openModal('shitzu.jpg')" src="shitzu.jpg" class="w-full h-full object-contain opacity-90 group-hover:scale-110 transition-all duration-700 cursor-zoom-in">
+                    </div>
+                    
+                    <div class="p-8 relative">
+                        <h4 class="text-3xl font-black italic hero-font text-white mb-2">Winston</h4>
+                        <p class="text-emerald-500 text-[10px] font-bold tracking-[0.2em] uppercase mb-4">Male | Texas Region</p>
+                        <ul class="space-y-2.5 mb-6 border-t border-white/5 pt-5">
+                            <li class="flex items-center text-slate-200 text-xs font-black bg-emerald-900/20 p-2 rounded-lg border border-emerald-500/20">📅 Born: Dec 02, 2025</li>
+                            <li class="flex items-center text-slate-400 text-xs"><span class="w-2 h-2 rounded-full bg-emerald-500 mr-3"></span> Royal Calm Temperament</li>
+                        </ul>
+                        <div class="flex items-center justify-between mt-6 pt-4 border-t border-white/5">
+                            <div class="flex flex-col"><span class="text-slate-500 text-[9px] uppercase tracking-widest">Asset Value</span><span class="text-white font-black text-xl">$3,800</span></div>
+                            <button onclick="location.href='registry.html'" class="bg-emerald-700 text-white px-5 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest">Secure Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative rounded-[2rem] bg-[#05050a] border-2 border-white/5 overflow-hidden opacity-70 transition-all duration-500">
+                    <div class="bg-purple-950/30 border-b border-purple-500/10 px-6 py-3 flex justify-between items-center">
+                        <span class="text-slate-500 text-[8px] font-black tracking-[0.3em] uppercase">Archive</span>
+                        <div class="flex items-center gap-2"><span class="text-red-500 text-[7px] font-bold tracking-widest uppercase">Reserved</span><div class="w-1.5 h-1.5 rounded-full bg-red-500"></div></div>
+                    </div>
+                    <div class="h-64 w-full relative flex items-center justify-center grayscale"><span class="text-slate-600/30 text-sm font-black tracking-[0.4em] uppercase rotate-[-10deg]">Image Secured</span></div>
+                    <div class="p-8 relative">
+                        <h4 class="text-3xl font-black italic hero-font text-slate-400 mb-2">Luna</h4>
+                        <p class="text-purple-500 text-[10px] font-bold tracking-[0.2em] uppercase mb-4">Silver Heritage Persian</p>
+                        <div class="flex items-center justify-between mt-6 pt-4 border-t border-white/5">
+                            <div class="flex flex-col"><span class="text-slate-600 text-[9px] uppercase tracking-widest">Status</span><span class="text-red-500 font-black text-xl italic">Escrow Locked</span></div>
+                            <button class="bg-transparent border border-slate-700 text-slate-500 px-5 py-2.5 rounded-full text-[10px] font-black uppercase cursor-not-allowed">Unavailable</button>
+                        </div>
+                    </div>
+                </div>
+                `;
+
+                container.innerHTML = htmlContent;
+
+            } catch (error) {
+                console.error("Fetch Error:", error);
+                document.getElementById('inventory-grid').innerHTML = '<div class="col-span-full text-center py-20 text-red-500 font-bold uppercase">System Error: Failed to connect to Vault.</div>';
+            }
+        }
+
+        window.onload = fetchLiveAssets;
+    </script>
 </body>
 </html>

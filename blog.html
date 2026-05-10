@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Breeder's Education & Knowledge Hub | MyPawTrust</title>
+    
+    <!-- 加载核心组件 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
+    <!-- 全站统一导航脚本 -->
+    <script src="nav-component.js"></script>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #F8FAFC; }
+        
+        /* 旗舰卡片悬浮动效 */
+        .article-card { 
+            background: white; 
+            border-radius: 2.5rem; 
+            overflow: hidden; 
+            border: 1px solid rgba(0,0,0,0.03); 
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+        .article-card:hover { 
+            transform: translateY(-12px) scale(1.01); 
+            box-shadow: 0 40px 80px -15px rgba(49, 46, 129, 0.08); 
+            border-color: rgba(79, 70, 229, 0.1);
+        }
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;  
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="text-slate-900 pt-20">
+
+    <!-- nav-component.js 将在这里自动生成导航栏 -->
+
+    <main class="max-w-6xl mx-auto px-6 py-24 md:py-32">
+        <header class="text-center mb-24">
+            <div class="inline-block bg-indigo-50 text-indigo-600 px-4 py-1 rounded-full text-[9px] font-black uppercase tracking-[0.4em] mb-6">Expert Perspectives</div>
+            <h2 class="text-5xl md:text-7xl font-black text-indigo-950 tracking-tighter italic mb-4 leading-none">Knowledge Hub</h2>
+            <p class="text-slate-400 max-w-xl mx-auto text-lg">Curated advice from our years of ethical boutique breeding experience in Florida.</p>
+        </header>
+
+        <!-- 动态文章展示网格 -->
+        <div id="blog-grid" class="grid grid-cols-1 md:grid-cols-2 gap-16">
+            <!-- 骨架屏：正在连接数据仓库... -->
+            <div class="col-span-full text-center py-20">
+                <div class="inline-block w-8 h-8 border-4 border-slate-200 border-t-indigo-600 rounded-full animate-spin"></div>
+                <p class="mt-4 text-xs font-bold text-slate-300 uppercase tracking-widest">Accessing Specialist Records...</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- 极简页脚 -->
+    <footer class="bg-white py-12 border-t border-slate-50 text-center">
+        <p class="text-[8px] font-black text-slate-300 uppercase tracking-[0.4em]">© 2024 MYPAWTRUST.COM • VERIFIED INTEGRITY</p>
+    </footer>
+
+    <script>
+        const PROJECT_ID = 'dpnrwrvyixpditytorcf';
+        const supabaseUrl = `https://${PROJECT_ID}.supabase.co`;
+        const supabaseKey = 'sb_publishable_-depQZkB_gomwvYWa5sYGQ_IfymhyvK';
+        const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        // 获取并渲染教育博文
+        async function loadBlogData() {
+            const { data: posts, error } = await _supabase
+                .from('posts')
+                .select('*')
+                .order('id', { ascending: false });
+
+            const grid = document.getElementById('blog-grid');
+
+            if (posts && posts.length > 0) {
+                grid.innerHTML = posts.map(p => `
+                    <div onclick="location.href='article.html?id=${p.id}'" class="article-card group">
+                        <div class="aspect-[16/9] overflow-hidden bg-slate-100">
+                            <img src="${p.image_url}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-[1.5s]" crossorigin="anonymous">
+                        </div>
+                        <div class="p-10 md:p-14">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-[9px] font-black text-indigo-500 uppercase tracking-[0.2em] border-l-2 border-indigo-500 pl-3">
+                                    ${p.category || 'Expert Care'}
+                                </span>
+                                <span class="text-[8px] font-bold text-slate-300 italic uppercase">
+                                    ${new Date(p.created_at).toLocaleDateString('en-US', {month: 'short', day: 'numeric'})}
+                                </span>
+                            </div>
+                            <h3 class="text-3xl font-black text-indigo-950 mt-2 mb-6 leading-tight tracking-tight uppercase group-hover:text-indigo-600 transition-colors">
+                                ${p.title}
+                            </h3>
+                            <p class="text-slate-500 text-sm leading-relaxed line-clamp-3">
+                                ${p.content}
+                            </p>
+                            
+                            <!-- 核心逻辑：这里就是通往具体文章房间的“钥匙” -->
+                            <div class="mt-10 flex items-center gap-3">
+                                <span class="text-[10px] font-black text-indigo-600 uppercase tracking-widest border-b-2 border-indigo-600 pb-1">
+                                    Read Full Insight
+                                </span>
+                                <span class="text-indigo-600 text-xl transition-transform group-hover:translate-x-2">→</span>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                grid.innerHTML = `
+                    <div class="col-span-full py-20 text-center bg-white rounded-[3rem] border border-dashed border-slate-100">
+                        <p class="text-slate-300 font-bold uppercase text-[10px] tracking-[0.5em]">Education modules coming soon</p>
+                    </div>
+                `;
+            }
+        }
+
+        window.onload = loadBlogData;
+    </script>
+</body>
+</html>

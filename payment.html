@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Checkout | MyPawTrust Payment Protection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#F8FAFC] text-slate-900 font-sans text-center">
+
+    <!-- 统一导航栏 -->
+    <nav class="bg-white border-b border-slate-200 px-6 py-4 flex justify-between items-center sticky top-0 z-50 shadow-sm">
+        <h1 onclick="location.href='index.html'" class="text-xl font-black text-indigo-900 italic cursor-pointer">🐾 MyPawTrust</h1>
+        <button onclick="history.back()" class="text-xs font-bold text-indigo-600">← Return to Gallery</button>
+    </nav>
+
+    <main class="max-w-2xl mx-auto px-6 py-16">
+        <!-- 安全头部 -->
+        <div class="mb-12">
+            <div class="inline-block p-4 bg-green-50 rounded-full mb-6 text-green-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04m17.236 0a11.92 11.92 0 01-2.118 6.811c-1.257 2.127-3.062 4.177-4.578 5.813a11.95 11.95 0 01-1.244 1.178L12 21.23l-.71-.504a11.95 11.95 0 01-1.244-1.178c-1.516-1.636-3.321-3.686-4.578-5.813a11.92 11.92 0 01-2.118-6.811z" />
+                </svg>
+            </div>
+            <h2 class="text-3xl font-black mb-2 tracking-tight">Secure Reservation</h2>
+            <p class="text-slate-500 font-medium">You are reserving a certified purebred companion.</p>
+        </div>
+
+        <!-- 支付逻辑卡片 -->
+        <div class="bg-white rounded-[2.5rem] border border-slate-200 p-8 shadow-2xl mb-12 text-left space-y-6">
+            <div class="flex justify-between items-center border-b border-slate-100 pb-4">
+                <span class="text-slate-500 font-bold uppercase text-[10px] tracking-widest">Transaction Type</span>
+                <span class="font-black text-indigo-900">Security Deposit</span>
+            </div>
+            
+            <div class="flex justify-between items-center border-b border-slate-100 pb-4">
+                <span class="text-slate-500 font-bold uppercase text-[10px] tracking-widest">Deposit Amount</span>
+                <span class="font-black text-2xl text-green-600">$200.00</span>
+            </div>
+
+            <div class="space-y-4 text-slate-600 text-sm leading-relaxed italic">
+                <p>● This deposit removes the pet from our marketplace immediately.</p>
+                <p>● Funds are held in our encrypted trust account via Stripe.</p>
+                <p>● The remaining balance is payable upon local pickup or before flight delivery.</p>
+            </div>
+            
+            <!-- 安全标识 -->
+            <div class="pt-6 flex justify-center space-x-6 opacity-40 grayscale">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg" alt="Stripe" class="h-6">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" class="h-6">
+            </div>
+        </div>
+
+        <!-- 支付动作 -->
+        <div class="space-y-4">
+            <a id="final-pay-link" href="#" target="_blank" class="block w-full bg-indigo-600 text-white py-6 rounded-2xl font-black text-xl shadow-xl shadow-indigo-100 hover:scale-[1.02] transition-all">
+                Proceed to Secure Checkout
+            </a>
+            <p class="text-[10px] text-slate-400 uppercase tracking-widest font-black">128-bit SSL Encrypted • Verified Security</p>
+        </div>
+
+        <!-- 技术支持 -->
+        <div class="mt-16 text-slate-400 text-xs">
+            <p>Experiencing issues? Text us at <span class="text-indigo-900 font-bold">+1 (321) 806-8281</span></p>
+        </div>
+    </main>
+
+    <script>
+        // 从网址获取支付链接
+        const params = new URLSearchParams(window.location.search);
+        const payUrl = params.get('url');
+        
+        if (payUrl) {
+            document.getElementById('final-pay-link').href = decodeURIComponent(payUrl);
+        } else {
+            // 如果没有链接，退回首页
+            document.getElementById('final-pay-link').onclick = () => alert("Invalid Payment Link. Please contact support.");
+        }
+    </script>
+</body>
+</html>

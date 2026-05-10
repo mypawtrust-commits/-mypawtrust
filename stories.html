@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trust Wall | MyPawTrust Verified Stories</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="nav-component.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,900&display=swap');
+        .serif-font { font-family: 'Playfair Display', serif; }
+        
+        /* 核心修复：针对长图截图，我们取消硬性裁剪，改用适应性容器 */
+        .hero-image-wrap { width: 100%; border-radius: 2.5rem; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
+        .hero-image-wrap img { width: 100%; aspect-ratio: 4/5; object-fit: cover; }
+        
+        /* 辅图区：允许截图显示全部内容，不再切头去尾 */
+        .evidence-img { 
+            width: 100%; 
+            height: auto; 
+            max-height: 450px; 
+            object-fit: contain; /* 改为 contain 确保显示全部，不裁剪 */
+            background: #020617; /* 给截图加个黑底，显得像手机屏幕 */
+            border-radius: 1.5rem; 
+            border: 4px solid white; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); 
+        }
+    </style>
+</head>
+<body class="bg-[#F8FAFC] text-slate-900 pt-24">
+
+    <main class="max-w-7xl mx-auto px-6 py-20 pb-40">
+        <header class="text-center mb-32">
+            <h2 class="text-5xl md:text-8xl font-black text-indigo-950 tracking-tighter serif-font italic mb-6">Our Happy Legacy</h2>
+            <p class="text-slate-400 text-sm md:text-base font-bold uppercase tracking-[0.4em] underline decoration-indigo-600 decoration-4 underline-offset-8">Direct Feedbacks & Verified Stories</p>
+        </header>
+
+        <div id="stories-engine" class="space-y-48">
+            <!-- 故事加载区 -->
+        </div>
+    </main>
+
+    <script>
+        const PROJECT_ID = 'dpnrwrvyixpditytorcf';
+        const supabaseUrl = `https://${PROJECT_ID}.supabase.co`;
+        const supabaseKey = 'sb_publishable_-depQZkB_gomwvYWa5sYGQ_IfymhyvK';
+        const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        function fixUrl(url) {
+            if(!url) return null;
+            return url.replace('http://', 'https://') + '?sync=' + Date.now();
+        }
+
+        async function initLegacyWall() {
+            const { data: tales } = await _supabase.from('stories').select('*').order('id', { ascending: false });
+            if(!tales) return;
+
+            document.getElementById('stories-engine').innerHTML = tales.map(t => {
+                const u1 = fixUrl(t.image_url);
+                const u2 = fixUrl(t.image_url_2);
+                const u3 = fixUrl(t.image_url_3);
+
+                return `
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 items-center">
+                    <!-- 左侧：主要时刻图 -->
+                    <div class="lg:col-span-6">
+                        <div class="hero-image-wrap group relative">
+                            <img src="${u1}" crossorigin="anonymous">
+                            <div class="absolute bottom-6 left-6 bg-white/90 backdrop-blur px-4 py-2 rounded-2xl">
+                                <p class="text-[10px] font-black uppercase text-indigo-600">Registered 2020 lineage</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 右侧：文本故事 + 截图证据 -->
+                    <div class="lg:col-span-6 space-y-12">
+                        <div class="border-l-4 border-indigo-500 pl-8 space-y-6">
+                            <div class="flex items-center space-x-2">
+                                <span class="bg-indigo-600 text-white text-[9px] font-black px-3 py-1 rounded-full tracking-widest uppercase">Verified Success</span>
+                                <span class="text-indigo-400 text-[10px] font-bold uppercase italic">${t.location || 'Florida Base'}</span>
+                            </div>
+                            <h3 class="text-4xl md:text-5xl font-black text-slate-900 tracking-tighter serif-font">${t.family_name || 'Legacy Family'}</h3>
+                            <p class="text-slate-600 text-lg md:text-xl font-light leading-relaxed italic">"${t.story_text}"</p>
+                        </div>
+
+                        <!-- 证据展示区：这里不再强行剪切图片 -->
+                        <div class="grid grid-cols-2 gap-4 items-start">
+                            ${u2 ? `<div class="rounded-2xl overflow-hidden shadow-xl border-4 border-white"><img src="${u2}" class="w-full h-auto object-cover aspect-square"></div>` : ''}
+                            ${u3 ? `
+                                <div class="flex flex-col space-y-2">
+                                    <p class="text-[8px] font-black uppercase text-slate-400 ml-1 tracking-widest text-center mb-1">Direct Proof:</p>
+                                    <img src="${u3}" class="evidence-img" crossorigin="anonymous">
+                                </div>
+                            ` : ''}
+                        </div>
+
+                        <div class="flex items-center space-x-6 pt-4 text-[10px] font-black text-slate-300 uppercase tracking-widest">
+                            <span>Kitten: ${t.cat_name || 'Companion'}</span>
+                            <span class="w-1 h-1 bg-slate-200 rounded-full"></span>
+                            <span>Secure Trust Ledger</span>
+                        </div>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+        window.onload = initLegacyWall;
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><title>Expert Insight | MyPawTrust Registry</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="nav-component.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+        body { font-family: sans-serif; line-height: 2; background-color: #fff; }
+        .serif-text { font-family: 'Playfair Display', serif; }
+        .article-photo { width: 100%; border-radius: 3rem; margin-bottom: 4rem; shadow: 2xl; border: 8px solid #F8FAFC; }
+    </style>
+</head>
+<body class="text-slate-900 pt-32">
+    <main class="max-w-3xl mx-auto px-6 pb-40">
+        <header class="mb-20 text-center">
+            <h1 id="a-title" class="text-4xl md:text-6xl font-black italic tracking-tighter text-indigo-950 serif-text leading-tight mb-8 uppercase"></h1>
+            <p id="a-date" class="text-[9px] font-black uppercase text-indigo-400 tracking-[0.5em]"></p>
+        </header>
+
+        <!-- 封面图 -->
+        <img id="a-img-1" class="article-photo shadow-2xl" crossorigin="anonymous">
+
+        <!-- 内容 -->
+        <div id="a-content" class="text-lg text-slate-600 font-light space-y-10 first-letter:text-7xl first-letter:font-black first-letter:mr-3 first-letter:float-left first-letter:text-indigo-900">
+            <!-- 专家文案注入点 -->
+        </div>
+
+        <!-- 【神级辅图画廊：展示那多出的两张图】 -->
+        <div id="article-gallery" class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-24">
+             <!-- 辅图位置 -->
+        </div>
+
+        <!-- 导流回首页 -->
+        <div class="mt-40 text-center border-t border-slate-100 pt-20">
+             <button onclick="location.href='index.html'" class="bg-indigo-950 text-white px-12 py-5 rounded-full font-black text-xs tracking-widest uppercase hover:scale-110 transition-all shadow-xl">Browse Curated Companions</button>
+        </div>
+    </main>
+
+    <script>
+        const _supabase = supabase.createClient('https://dpnrwrvyixpditytorcf.supabase.co', 'sb_publishable_-depQZkB_gomwvYWa5sYGQ_IfymhyvK');
+
+        async function initArticle() {
+            const id = new URLSearchParams(window.location.search).get('id');
+            const { data: a } = await _supabase.from('posts').select('*').eq('id', id).single();
+            if(a) {
+                document.getElementById('a-title').innerText = a.title;
+                document.getElementById('a-date').innerText = `Registered Content Archive • 2020 Heritage`;
+                document.getElementById('a-img-1').src = a.image_url;
+                
+                // 处理辅图逻辑
+                let galHTML = '';
+                if(a.image_url_2) galHTML += `<img src="${a.image_url_2}" class="w-full aspect-[4/5] object-cover rounded-3xl shadow-lg border-4 border-white" crossorigin="anonymous">`;
+                if(a.image_url_3) galHTML += `<img src="${a.image_url_3}" class="w-full aspect-[4/5] object-cover rounded-3xl shadow-lg border-4 border-white" crossorigin="anonymous">`;
+                document.getElementById('article-gallery').innerHTML = galHTML;
+
+                // 内容分段展示
+                document.getElementById('a-content').innerHTML = a.content.split('\n').map(p => `<p class="mb-8">${p}</p>`).join('');
+            }
+        }
+        window.onload = initArticle;
+    </script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><title>Imperial HQ v21.1 | MyPawTrust Professional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        body { background: #010409; color: #f8fafc; font-family: 'Inter', sans-serif; }
+        .control-unit { background: rgba(13, 17, 23, 0.95); border: 1px solid #30363d; border-radius: 2.5rem; padding: 2.5rem; margin-bottom: 40px; transition: 0.3s; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+        .control-unit:hover { border-color: #6366f1; transform: translateY(-3px); }
+        input, textarea, select { background: #0d1117 !important; border: 1px solid #30363d !important; color: white !important; padding: 12px; border-radius: 12px; font-size: 12px; width:100%; outline: none; margin-bottom: 4px; }
+        .mpt-label { font-size: 8px; font-weight: 900; color: #8b949e; text-transform: uppercase; margin-bottom: 6px; display: block; letter-spacing: 1.5px; }
+        .action-btn { transition: 0.3s; font-weight: 900; border-radius: 1rem; cursor: pointer; text-transform: uppercase; padding: 18px; width: 100%; border: none; font-size: 11px; }
+        .burn-btn { color: #f85149; border: 1px solid #f85149; padding: 4px 10px; border-radius: 8px; font-size: 8px; font-weight: 900; }
+        .burn-btn:hover { background: #f85149; color: white; }
+    </style>
+</head>
+<body class="p-6 md:p-12 pb-60">
+
+    <div class="max-w-6xl mx-auto">
+        <header class="flex flex-col md:flex-row justify-between items-end mb-16 border-b border-[#30363d] pb-10 space-y-6">
+            <div>
+                <h1 class="text-4xl font-black text-indigo-500 italic uppercase tracking-tighter">MyPawTrust <span class="text-white">Empire HQ</span></h1>
+                <p class="text-slate-500 text-[10px] font-bold uppercase tracking-[0.3em] mt-2 underline decoration-indigo-800 decoration-4 underline-offset-8">v21.1 Certified Private Console</p>
+            </div>
+            <div class="flex gap-4">
+                <a href="index.html" class="text-xs font-black text-slate-400 border-b-2 border-transparent hover:text-white transition-all italic">← Public Market Entrance</a>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            <!-- 模块 01：在售宠物列表 (蓝色) -->
+            <section class="control-unit border-blue-500/20">
+                <h3 class="text-sm font-black text-blue-500 uppercase mb-8 italic"><span class="w-2 h-2 bg-blue-600 rounded-full inline-block mr-2 animate-pulse"></span> 01. ACTIVE INVENTORY DEPLOYMENT</h3>
+                <div class="space-y-3">
+                    <input id="p_breed" type="text" placeholder="Title (e.g. Pure White Odd-Eyed Persian)">
+                    <div class="grid grid-cols-2 gap-4">
+                        <input id="p_price" type="number" placeholder="Full Price ($4500)">
+                        <select id="p_gen"><option value="Male">Male ♂</option><option value="Female">Female ♀</option></select>
+                    </div>
+                    <!-- 🚨 新增的两个关键字段 🚨 -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <input id="p_birth" type="text" placeholder="DOB (e.g. Feb 28, 2026)">
+                        <input id="p_loc" type="text" placeholder="Location (e.g. Florida Sanctuary)">
+                    </div>
+                    <textarea id="p_desc" placeholder="Expert notes: Coat Signature, Eye Genetics..." class="h-20"></textarea>
+                    <input id="p_img" type="file" class="bg-black text-[9px] w-full rounded p-1">
+                    <button onclick="mptPetLaunch()" id="bp" class="action-btn bg-blue-600 shadow-blue-900/20 shadow-xl">Push Listing to Market</button>
+                </div>
+            </section>
+
+            <!-- 模块 02：老客见证墙 (粉色) -->
+            <section class="control-unit border-pink-500/30">
+                <h3 class="text-sm font-black text-pink-500 uppercase mb-8 italic"><span class="w-2 h-2 bg-pink-500 rounded-full inline-block mr-2"></span> 02. HAPPY TAILS STORIES</h3>
+                <div class="space-y-3">
+                    <div class="grid grid-cols-2 gap-3"><input id="s_fam" type="text" placeholder="Buyer's Last Name"><input id="s_cat" type="text" placeholder="Pet's New Name"></div>
+                    <textarea id="s_story" placeholder="Briefly describe their new journey home..." class="h-24"></textarea>
+                    <div class="grid grid-cols-2 gap-2"><input id="s_f1" type="file" class="text-[8px] bg-slate-900 w-full rounded p-1"><input id="s_f2" type="file" class="text-[8px] bg-slate-900 w-full rounded p-1"></div>
+                    <button onclick="mptStoryLaunch()" id="bs" class="action-btn bg-pink-600 shadow-pink-900/20 shadow-xl">Broadcast Memory</button>
+                </div>
+            </section>
+
+            <!-- 模块 03：教育百科 (橙色) -->
+            <section class="control-unit border-orange-500/20">
+                <h3 class="text-sm font-black text-orange-400 uppercase mb-8 italic"><span class="w-2 h-2 bg-orange-600 rounded-full inline-block mr-2"></span> 03. KNOWLEDGE CENTER</h3>
+                <div class="space-y-3">
+                    <input id="b_title" type="text" placeholder="SEO Ready Headline">
+                    <textarea id="b_content" placeholder="Full expert care article data..." class="h-32"></textarea>
+                    <div class="bg-black border border-orange-500/20 p-2 rounded-xl flex gap-3">
+                         <input id="b_cat" type="text" placeholder="Subject" class="mb-0 flex-1">
+                         <input id="b_f" type="file" class="text-[8px] flex-1">
+                    </div>
+                    <button onclick="mptBlogLaunch()" id="bb" class="action-btn bg-orange-600 shadow-orange-950/20 shadow-xl">Synchronize Node</button>
+                </div>
+            </section>
+
+            <!-- 模块 04：佣金礼包 (绿色) -->
+            <section class="control-unit border-emerald-500/20">
+                <h3 class="text-sm font-black text-emerald-400 uppercase mb-8 italic"><span class="w-2 h-2 bg-emerald-500 rounded-full inline-block mr-2"></span> 04. COMMISSION NODE</h3>
+                <div class="space-y-3">
+                    <input id="k_name" type="text" placeholder="Product Full Name">
+                    <div class="grid grid-cols-2 gap-4">
+                        <select id="k_age"><option value="Kitten">Kitten / Nursery</option><option value="Adult">Adult / Prestige</option></select>
+                        <input id="k_img" type="text" placeholder="Image URL">
+                    </div>
+                    <input id="k_link" type="text" placeholder="Amazon Affiliate Link">
+                    <textarea id="k_advice" placeholder="Your expert verdict note..." class="h-12"></textarea>
+                    <button onclick="mptKitLaunch()" class="action-btn bg-emerald-600 shadow-emerald-950/20">Active Payout Node</button>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        const PROJECT_ID = 'dpnrwrvyixpditytorcf';
+        const supabaseUrl = `https://${PROJECT_ID}.supabase.co`;
+        const supabaseKey = 'sb_publishable_-depQZkB_gomwvYWa5sYGQ_IfymhyvK';
+        const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        // 🚨 修复 1：把仓库名字改成了你刚建好的 pet-photos 🚨
+        async function fUp(file) {
+            const name = `asset_${Date.now()}_${Math.random().toString(36).substring(7)}.jpg`;
+            const { error: e } = await _supabase.storage.from('pet-photos').upload(name, file, { contentType:'image/jpeg', upsert:true });
+            if(e) throw e;
+            const { data: d } = _supabase.storage.from('pet-photos').getPublicUrl(name); return d.publicUrl;
+        }
+
+        async function mptPetLaunch() { 
+            const b=document.getElementById('bp'); 
+            const f=document.getElementById('p_img').files[0]; 
+            if(!f) { alert("长官，必须上传一张宠物图片！"); return; }
+            b.disabled=true; b.innerText="ENCODING ASSET..."; 
+            try { 
+                const u = await fUp(f); 
+                // 🚨 修复 2：对齐了所有的字段，完美匹配！ 🚨
+                const { error } = await _supabase.from('pets').insert([{ 
+                    breed: document.getElementById('p_breed').value, 
+                    price: parseFloat(document.getElementById('p_price').value), 
+                    gender: document.getElementById('p_gen').value, 
+                    birth_date: document.getElementById('p_birth').value,
+                    breeder_location: document.getElementById('p_loc').value, 
+                    description: document.getElementById('p_desc').value, 
+                    image_url_1: u, 
+                    is_verified: true 
+                }]); 
+                if(error) throw error;
+                alert("✅ ASSET DEPLOYED SUCCESSFULLY! (资产部署成功！)");
+                location.reload(); 
+            } catch(e) { 
+                alert("报错了：" + e.message); 
+                b.disabled=false; b.innerText="Push Listing to Market";
+            } 
+        }
+
+        async function mptStoryLaunch() { const b=document.getElementById('bs'); const f1=document.getElementById('s_f1').files[0]; const f2=document.getElementById('s_f2').files[0]; if(!f1) return; b.disabled=true; try { const u1 = await fUp(f1); let u2 = f2 ? await fUp(f2) : null; await _supabase.from('stories').insert([{ family_name: document.getElementById('s_fam').value, cat_name: document.getElementById('s_cat').value, story_text: document.getElementById('s_story').value, image_url: u1, image_url_2: u2 }]); location.reload(); } catch(e) { alert(e.message); b.disabled=false; } }
+
+        async function mptBlogLaunch() { const b=document.getElementById('bb'); const f=document.getElementById('b_f').files[0]; b.disabled=true; try { const u = await fUp(f); await _supabase.from('posts').insert([{ title: document.getElementById('b_title').value, content: document.getElementById('b_content').value, category: document.getElementById('b_cat').value || 'Heritage Care', image_url: u }]); location.reload(); } catch(e) { alert(e.message); b.disabled=false; } }
+
+        async function mptKitLaunch() { const { error } = await _supabase.from('recommended_products').insert([{ product_name: document.getElementById('k_name').value, target_age: document.getElementById('k_age').value, affiliate_link: document.getElementById('k_link').value, product_image: document.getElementById('k_img').value, expert_advice: document.getElementById('k_advice').value }]); location.reload(); }
+    </script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Certified Collection | MyPawTrust Registry</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- 全球统一中枢：Logo/导航栏/Favicon 一键同步 -->
+    <script src="nav-component.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,900&family=Inter:wght@400;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #fbfbfc; }
+        .hero-font { font-family: 'Playfair Display', serif; }
+        .img-active { border: 3px solid #312e81; padding: 4px; background: white; transform: scale(0.95); }
+        .diamond-card { background: #010409; color: #fff; border: 1px solid rgba(255,255,255,0.1); border-radius: 2.5rem; position: relative; overflow: hidden; }
+        .pay-btn-shine { background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); transition: all 0.3s ease; box-shadow: 0 10px 40px -10px rgba(49, 46, 129, 0.4); }
+        .pay-btn-shine:hover { transform: scale(1.02); filter: brightness(1.2); }
+    </style>
+</head>
+<body class="text-slate-900 pt-20">
+
+    <!-- nav-component.js 会自动在这里注入旗舰导航栏 -->
+
+    <main class="max-w-7xl mx-auto px-6 py-12 md:py-24">
+        
+        <!-- 数据加载中 -->
+        <div id="loader" class="text-center py-20 animate-pulse text-slate-300 font-black uppercase text-[10px] tracking-[0.6em]">Verifying Heritage Records...</div>
+
+        <!-- 详情展厅布局 -->
+        <div id="detail-box" class="hidden grid grid-cols-1 lg:grid-cols-12 gap-16">
+            
+            <!-- 【左半部：高动态范围画廊】 -->
+            <div class="lg:col-span-5 space-y-6">
+                <div class="relative overflow-hidden rounded-[3rem] shadow-2xl border-4 border-white aspect-[4/5]">
+                    <img id="big-photo" src="" class="w-full h-full object-cover" crossorigin="anonymous">
+                    <div id="sold-layer" class="hidden absolute inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center">
+                        <span class="border-4 border-red-500 text-red-500 text-5xl font-black px-6 py-2 rounded-xl -rotate-12 uppercase tracking-tighter bg-white/70">SOLD</span>
+                    </div>
+                </div>
+                <!-- 底部三张联想辅图 (多维度展示) -->
+                <div id="mini-thumbs" class="flex gap-4"></div>
+            </div>
+
+            <!-- 【右半部：精英商业参数区】 -->
+            <div class="lg:col-span-7 space-y-12">
+                <header>
+                    <span class="bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border border-indigo-100 mb-6 inline-block">Official 2020 Heritage Registry</span>
+                    <div class="flex items-center gap-4">
+                        <h2 id="pet-breed" class="text-5xl lg:text-7xl font-black text-indigo-950 tracking-tighter italic hero-font"></h2>
+                        <span id="pet-gender-icon" class="text-4xl"></span>
+                    </div>
+                    <p id="pet-price" class="text-4xl font-black text-indigo-600 font-mono mt-2 tracking-tighter"></p>
+                </header>
+
+                <!-- 专家钻石感悟卡 (灵魂注入) -->
+                <section class="diamond-card p-10 md:p-14 shadow-2xl">
+                    <p class="text-[9px] font-black text-indigo-400 uppercase tracking-[0.5em] mb-4 underline decoration-indigo-800">Founder's Integrity Statement 💎</p>
+                    <p id="breeder-note" class="text-white text-base md:text-xl font-light italic leading-relaxed opacity-90 pr-8"></p>
+                    <div class="absolute -right-6 -bottom-10 text-[180px] opacity-[0.03]">MPT</div>
+                </section>
+
+                <!-- 参数表格 -->
+                <div class="grid grid-cols-2 gap-y-10 border-y border-slate-100 py-10">
+                    <div><p class="text-[9px] font-black text-slate-400 uppercase">Registration Home</p><p id="pet-loc" class="font-bold text-slate-800 text-sm mt-1 underline decoration-2 decoration-indigo-100"></p></div>
+                    <div><p class="text-[9px] font-black text-slate-400 uppercase">Verified Age</p><p id="pet-bday" class="font-bold text-slate-800 text-sm mt-1"></p></div>
+                    <div class="col-span-2">
+                        <p class="text-[9px] font-black text-slate-400 uppercase">Standard Protection</p>
+                        <p class="text-[10px] font-black text-emerald-600 uppercase mt-2 italic flex items-center">
+                           <span class="mr-2">🛡️</span> Licensed 1-Year Genetic Health Coverage Provided.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- 行动触发组 (财富入路) -->
+                <div class="space-y-6 pt-6">
+                    <a id="pay-link" href="#" class="pay-btn-shine block w-full text-white text-center py-6 rounded-3xl font-black text-lg tracking-widest uppercase active:scale-95 transition-all">Reserve My Forever Friend</a>
+                    
+                    <!-- 核心法律保障入口 -->
+                    <p class="text-center text-[9px] text-slate-400 font-bold uppercase tracking-widest px-8 leading-loose italic">
+                        By proceeding, you certify that you have read and agreed to the MyPawTrust 
+                        <a href="legal.html" class="text-indigo-600 underline">Terms of Integrity & Liability Audit</a>.
+                    </p>
+
+                    <!-- 分页链接网格 -->
+                    <div class="grid grid-cols-2 gap-3 pt-6 border-t border-slate-100">
+                        <button onclick="location.href='shipping.html'" class="p-4 bg-white border border-slate-200 rounded-2xl font-black text-[9px] text-slate-500 hover:text-indigo-600 tracking-widest uppercase">Safe Delivery Hub</button>
+                        <button onclick="location.href='tracking.html'" class="p-4 bg-white border border-slate-200 rounded-2xl font-black text-[9px] text-slate-500 hover:text-indigo-600 tracking-widest uppercase">Fulfillment Tracking</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const PROJECT_ID = 'dpnrwrvyixpditytorcf';
+        const _supabase = supabase.createClient(`https://${PROJECT_ID}.supabase.co`, 'sb_publishable_-depQZkB_gomwvYWa5sYGQ_IfymhyvK');
+
+        function cleanUrl(url) { if(!url) return null; return url.replace('http://', 'https://') + '?sync=' + Date.now(); }
+
+        async function initPremiumPage() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+            if(!id) return location.href='index.html';
+
+            const { data: p } = await _supabase.from('pets').select('*').eq('id', id).single();
+            if(!p) return;
+
+            // 文字归位
+            document.getElementById('pet-breed').innerText = p.breed;
+            document.getElementById('pet-price').innerText = `$${p.price.toLocaleString()}`;
+            document.getElementById('pet-loc').innerText = p.breeder_location || 'Verified Florida Nursery';
+            document.getElementById('pet-bday').innerText = p.birthday || 'N/A';
+            document.getElementById('pet-gender-icon').innerText = p.gender === 'Male' ? '♂' : '♀';
+            document.getElementById('pet-gender-icon').className = p.gender === 'Male' ? 'text-4xl text-blue-500' : 'text-4xl text-pink-400';
+            
+            // 专家灵魂评价加载
+            document.getElementById('breeder-note').innerText = p.breeder_note || 'Born into a home of music and touch, this companion has been nurtured for a lifetime of serene companionship.';
+
+            // 主图展示与状态处理
+            document.getElementById('big-photo').src = cleanUrl(p.image_url_1);
+            if(p.is_sold) {
+                document.getElementById('sold-layer').classList.remove('hidden');
+                const btn = document.getElementById('pay-link');
+                btn.innerText = "Adopted Successfully - See Joy Wall";
+                btn.href = "stories.html";
+                btn.className = "block w-full bg-slate-100 text-slate-400 py-6 text-center rounded-3xl font-black uppercase text-xs";
+            } else if(p.payment_link) {
+                // 跳转支付说明中介页 (金路连通)
+                document.getElementById('pay-link').href = `payment.html?url=${encodeURIComponent(p.payment_link)}`;
+            }
+
+            document.getElementById('loader').classList.add('hidden');
+            document.getElementById('detail-box').classList.remove('hidden');
+        }
+
+        window.onload = initPremiumPage;
+    </script>
+</body>
+</html>

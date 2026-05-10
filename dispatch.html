@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><title>Elite Dispatch | MPT Logistics Hub</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body { background: #020617; color: #fff; font-family: 'Inter', sans-serif; }
+        .control-room { background: rgba(13, 17, 23, 0.95); border: 2px solid #312e81; border-radius: 3rem; padding: 40px; }
+        .btn-glow { background: linear-gradient(135deg, #10b981 0%, #059669 100%); font-weight: 900; letter-spacing: 2px; }
+    </style>
+</head>
+<body class="p-8">
+
+    <div class="max-w-4xl mx-auto">
+        <header class="text-center mb-16">
+            <h2 class="text-5xl font-black italic text-white uppercase tracking-tighter">Logistics <span class="text-indigo-400 underline">Engine</span></h2>
+            <p class="text-slate-500 uppercase text-[9px] tracking-[0.4em] mt-3">White-Glove Delivery Generator</p>
+        </header>
+
+        <section class="control-room shadow-2xl">
+            <h3 class="text-lg font-black text-emerald-400 mb-8 italic uppercase underline">Generate Master Shipping Label</h3>
+            
+            <div class="space-y-6">
+                <!-- 关联具体的宠物ID -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div><label class="text-[9px] font-black uppercase text-slate-500 mb-2 block">Pet Reference ID</label><input id="p_id" type="number" placeholder="e.g. 125" class="w-full p-4 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none"></div>
+                    <div><label class="text-[9px] font-black uppercase text-slate-500 mb-2 block">Delivery Method</label>
+                        <select id="carrier" class="w-full p-4 bg-slate-900 border border-slate-700 rounded-xl text-white outline-none">
+                            <option value="FlightNanny">MPT Authorized Flight Nanny</option>
+                            <option value="CitizenShipper">Verified Ground Transport (USDA)</option>
+                            <option value="AlaskaAir">Alaska Air PetSafe Expedited</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div><label class="text-[9px] font-black uppercase text-slate-500 mb-2 block">Flight / Truck Number</label><input id="c_route" type="text" placeholder="Flight #AA456" class="w-full p-4 bg-slate-900 border border-slate-700 rounded-xl text-white"></div>
+                    <div><label class="text-[9px] font-black uppercase text-slate-500 mb-2 block">ETD Arrival Date</label><input id="c_date" type="date" class="w-full p-4 bg-slate-900 border border-slate-700 rounded-xl text-white"></div>
+                </div>
+
+                <button onclick="igniteLogistics()" id="igniteBtn" class="w-full btn-glow text-white py-6 rounded-[2rem] shadow-2xl hover:scale-[1.01] transition-all">
+                    Generate MyPawTrust Tracking ID →
+                </button>
+            </div>
+        </section>
+
+        <!-- 成功状态（显示单号并下载标签） -->
+        <div id="label-output" class="hidden mt-12 bg-white rounded-[2rem] p-10 text-center animate-bounce shadow-2xl">
+            <h4 class="text-slate-900 font-black text-2xl mb-4">SUCCESS! TRACKING LIVE</h4>
+            <div class="p-6 bg-slate-50 rounded-2xl border-4 border-dashed border-indigo-200">
+                <p class="text-[10px] text-slate-400 font-black mb-2">SCAN FOR MPT CUSTOMS CLEARANCE</p>
+                <p id="final-tid" class="text-5xl font-black text-indigo-950 font-mono tracking-tighter italic"></p>
+            </div>
+            <button onclick="window.print()" class="mt-8 bg-indigo-950 text-white px-8 py-4 rounded-xl font-bold uppercase text-[10px]">📄 Print White-Glove Shipping Label</button>
+        </div>
+    </div>
+
+    <script>
+        const _supabase = supabase.createClient('https://dpnrwrvyixpditytorcf.supabase.co', 'sb_publishable_-depQZkB_gomwvYWa5sYGQ_IfymhyvK');
+
+        async function igniteLogistics() {
+            const petId = document.getElementById('p_id').value;
+            const carrier = document.getElementById('carrier').value;
+            if(!petId) return alert("Pet ID Required");
+
+            const genId = `MPT-${Math.random().toString(36).substring(7).toUpperCase()}-${petId}`;
+            
+            const { error } = await _supabase.from('pets').update({
+                shipping_tracking: genId,
+                shipping_method: carrier + " Escorted"
+            }).eq('id', petId);
+
+            if(!error) {
+                document.getElementById('final-tid').innerText = genId;
+                document.getElementById('label-output').classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>

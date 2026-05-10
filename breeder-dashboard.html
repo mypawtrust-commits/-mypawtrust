@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"><title>Breeder Success Dashboard | MyPawTrust Partner</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #020617; color: #f8fafc; }
+        .mpt-card { background: rgba(30, 41, 59, 0.5); border: 1px solid #1e293b; border-radius: 2.5rem; padding: 2rem; backdrop-filter: blur(20px); }
+        .stat-glow { color: #818cf8; text-shadow: 0 0 20px rgba(99, 102, 241, 0.5); }
+    </style>
+</head>
+<body class="p-4 md:p-12">
+
+    <div class="max-w-7xl mx-auto">
+        <!-- 导航与身份 -->
+        <header class="flex justify-between items-start mb-16 border-b border-slate-800 pb-10">
+            <div>
+                <h1 class="text-3xl font-black italic tracking-tighter uppercase">Breeder <span class="text-indigo-500">Dashboard</span></h1>
+                <p class="text-slate-500 text-[9px] uppercase tracking-widest mt-1">Authorized Boutique Access Level 01</p>
+            </div>
+            <div class="flex items-center gap-6">
+                <div class="text-right">
+                    <p id="b-name" class="font-bold text-white uppercase text-sm">--</p>
+                    <p class="text-[8px] text-emerald-500 font-black uppercase tracking-[0.3em]">Verified Gold Member</p>
+                </div>
+                <img id="b-avatar" src="favicon.png" class="w-12 h-12 rounded-full border-2 border-indigo-600">
+            </div>
+        </header>
+
+        <!-- 数据核心 (功能 4: 累计金额 & 评分) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+            <div class="mpt-card text-center">
+                <p class="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-4">90-Day Gross Revenue</p>
+                <h2 id="total-revenue" class="text-5xl font-black stat-glow">$0.00</h2>
+                <p class="text-[7px] text-slate-400 mt-2 italic">Updated via PayPal Payout Registry</p>
+            </div>
+            <div class="mpt-card text-center border-emerald-900/30">
+                <p class="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-4">Quality Reputation</p>
+                <h2 id="avg-rating" class="text-5xl font-black text-white">4.9<span class="text-xl text-indigo-400">/5</span></h2>
+                <div class="text-yellow-500 mt-2 tracking-widest">★★★★★</div>
+            </div>
+            <div class="mpt-card text-center">
+                <p class="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-4">Live Hub Connections</p>
+                <h2 id="total-listing" class="text-5xl font-black text-white">0</h2>
+                <button onclick="location.href='#add-sec'" class="text-[8px] text-indigo-400 font-bold uppercase mt-4 underline">+ List New</button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+            <!-- 功能 1 & 5: 库存管理与视频上传 (左侧) -->
+            <div id="add-sec" class="lg:col-span-5 space-y-8">
+                <div class="mpt-card">
+                    <h3 class="text-xl font-bold mb-8 italic uppercase text-indigo-400">Rapid Inventory Launch</h3>
+                    <div class="space-y-4">
+                        <input id="p_breed" type="text" placeholder="Breed" class="bg-black p-3 rounded-xl border border-slate-800 text-xs w-full text-white outline-none focus:ring-2 focus:ring-indigo-600">
+                        <input id="p_price" type="number" placeholder="Asking Price ($)" class="bg-black p-3 rounded-xl border border-slate-800 text-xs w-full text-white">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="p-3 bg-slate-900/50 rounded-2xl">
+                                <label class="block text-[8px] text-slate-500 mb-2 uppercase">Hero Photo</label>
+                                <input id="p_f" type="file" class="text-[8px] w-full">
+                            </div>
+                            <div class="p-3 bg-slate-900/50 rounded-2xl">
+                                <label class="block text-[8px] text-slate-500 mb-2 uppercase">Short Clip (Video)</label>
+                                <input id="p_v" type="file" accept="video/mp4" class="text-[8px] w-full">
+                            </div>
+                        </div>
+                        <button onclick="saveAsset()" id="saveBtn" class="w-full bg-indigo-600 py-4 rounded-3xl font-black uppercase text-[10px] tracking-widest hover:scale-105 transition-all">Submit Asset for Verification</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 功能 2 & 3: 评价、反馈与咨询 (右侧) -->
+            <div class="lg:col-span-7 space-y-12">
+                <!-- 买家申请中心 -->
+                <div class="mpt-card">
+                    <h3 class="text-xs font-black text-emerald-400 uppercase tracking-widest mb-6">Unprocessed Inquiries (Leads)</h3>
+                    <div id="leads-list" class="space-y-4">
+                        <p class="text-slate-600 text-xs italic">Checking secured channels...</p>
+                    </div>
+                </div>
+
+                <!-- 买家反馈大厅 -->
+                <div class="mpt-card">
+                    <h3 class="text-xs font-black text-pink-400 uppercase tracking-widest mb-6 italic border-b border-pink-900/30 pb-4">Client Feedback Ledger</h3>
+                    <div id="review-list" class="space-y-6">
+                        <!-- 这里以后同步来自老客真实评分 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const PROJECT_ID = 'dpnrwrvyixpditytorcf';
+        const supabaseUrl = `https://${PROJECT_ID}.supabase.co`;
+        const supabaseKey = 'sb_publishable_-depQZkB_gomwvYWa5sYGQ_IfymhyvK';
+        const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        async function saveAsset() {
+            const btn = document.getElementById('saveBtn'); const f = document.getElementById('p_f').files[0]; const v = document.getElementById('p_v').files[0];
+            btn.disabled = true; btn.innerText = "Encrypting assets...";
+            try {
+                // 上传照片与视频 (双轨道自动化)
+                const u_p = await uploader(f); let u_v = null;
+                if(v) u_v = await uploader(v);
+                
+                await _supabase.from('pets').insert([{
+                    breed: document.getElementById('p_breed').value, 
+                    price: parseFloat(document.getElementById('p_price').value),
+                    image_url_1: u_p, 
+                    video_url: u_v,
+                    is_verified: false // 需要管理员审核
+                }]);
+                location.reload();
+            } catch(e) { alert(e.message); btn.disabled = false; }
+        }
+
+        async function uploader(f) {
+            const n = `brd_res_${Date.now()}.bin`;
+            const { error:e } = await _supabase.storage.from('pets').upload(n, f, { upsert: true });
+            if(e) throw e;
+            const { data: d } = _supabase.storage.from('pets').getPublicUrl(n); return d.publicUrl;
+        }
+
+        // 加载逻辑：略 (同步该卖家的订单和评分)
+    </script>
+</body>
+</html>

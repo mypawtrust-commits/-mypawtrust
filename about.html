@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Our Mission | MyPawTrust Premium Heritage</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <!-- 全球统一导航中枢 (自动注入Logo/图标/翻译) -->
+    <script src="nav-component.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,900&family=Inter:wght@300;400;700&display=swap');
+        
+        body { font-family: 'Inter', sans-serif; background-color: #ffffff; }
+        .serif-font { font-family: 'Playfair Display', serif; }
+        
+        /* 极致的视差大屏引擎 */
+        .hero-viewport { 
+            position: relative;
+            height: 85vh; /* 占据屏幕85%的高度 */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: url('https://dpnrwrvyixpditytorcf.supabase.co/storage/v1/object/public/pet-photos/OIG2.3dEA0.e_.jfif');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* 视差关键：图片随滚动有拉伸感 */
+        }
+        
+        /* 深色高光层 */
+        .hero-vibe {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.3) 100%);
+        }
+
+        .mpt-vow-card { background: white; border-radius: 3rem; border: 1px solid rgba(0,0,0,0.04); }
+    </style>
+</head>
+<body class="text-slate-900">
+
+    <!-- 1. 灵魂巨幕 Hero Section -->
+    <section class="hero-viewport">
+        <div class="hero-vibe"></div>
+        <div class="relative z-10 text-center px-6 max-w-4xl">
+            <div class="inline-block border border-indigo-400/50 text-indigo-300 px-5 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.4em] mb-12 italic">Established 2020 • Florida Boutique</div>
+            <h1 class="serif-font text-white text-6xl md:text-8xl font-black italic tracking-tighter leading-none mb-10">
+                The Heritage <br><span class="text-indigo-400 underline decoration-1 underline-offset-8">Vow.</span>
+            </h1>
+            <p class="text-slate-300 text-lg md:text-2xl font-light italic leading-relaxed max-w-2xl mx-auto">
+                "Our mission is simple: to ensure every pet finds a safe harbor, lives a life full of joy, and thrives in unconditional love."
+            </p>
+        </div>
+    </section>
+
+    <!-- 2. 主理人精神内容 -->
+    <main class="max-w-7xl mx-auto px-6 py-32 space-y-48">
+        
+        <!-- 关于初心 -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div class="space-y-10">
+                <div class="space-y-4">
+                    <span class="text-indigo-600 font-black uppercase text-[10px] tracking-widest border-l-4 border-indigo-600 pl-4">Since Day One</span>
+                    <h3 class="text-4xl md:text-5xl font-black text-indigo-950 tracking-tighter">Born in Homes. <br>Nurtured for Families.</h3>
+                </div>
+                <div class="text-slate-500 text-lg leading-loose space-y-6 font-light italic">
+                    <p>MyPawTrust did not begin with a computer screen; it began with the warmth of a Florida nursery. As a family team of the 1970s generation, we observed an online pet market becoming increasingly impersonal and cold. We decided to reboot the industry's standards.</p>
+                    <p>Starting in 2020, we committed to a boutique model where every Chinchilla Persian and Shih Tzu companion is "Living Room Born." No cold crates. No shortcuts. Just early socialization with human touch, household music, and 100% integrity.</p>
+                </div>
+                <div class="h-[1px] w-20 bg-indigo-200"></div>
+            </div>
+            
+            <div class="relative">
+                <!-- 这里可以用那张明亮版的猫猫合影作为反衬 -->
+                <div class="rounded-[4rem] overflow-hidden shadow-2xl border-[16px] border-slate-50">
+                    <img src="https://dpnrwrvyixpditytorcf.supabase.co/storage/v1/object/public/pet-photos/OIG2.3dEA0.e_.jfif" class="w-full h-full object-cover">
+                </div>
+                <div class="absolute -bottom-8 -right-8 bg-indigo-900 text-white p-8 rounded-full shadow-2xl font-black italic">MPT</div>
+            </div>
+        </section>
+
+        <!-- 3. 三大金科玉律 (信任价值网) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div class="mpt-vow-card p-12 text-center group">
+                <div class="text-4xl mb-8 group-hover:scale-125 transition-transform duration-500">🏠</div>
+                <h4 class="font-black text-xs uppercase tracking-[0.2em] mb-4 text-indigo-950">A Life Full of Joy</h4>
+                <p class="text-slate-400 text-[11px] leading-loose font-bold uppercase opacity-80 italic">We verify every home. We don't sell pets; we find them their lifelong soulmates.</p>
+            </div>
+            <div class="mpt-vow-card p-12 text-center group border-2 border-indigo-100 shadow-xl">
+                <div class="text-4xl mb-8 group-hover:rotate-12 transition-transform duration-500">🛡️</div>
+                <h4 class="font-black text-xs uppercase tracking-[0.2em] mb-4 text-indigo-900 underline decoration-indigo-200">Health Covenant</h4>
+                <p class="text-slate-400 text-[11px] leading-loose font-bold uppercase italic">Backing our 2020 lineage with a verified 1-year genetic health protection plan.</p>
+            </div>
+            <div class="mpt-vow-card p-12 text-center group">
+                <div class="text-4xl mb-8 group-hover:-translate-y-2 transition-transform duration-500">✈️</div>
+                <h4 class="font-black text-xs uppercase tracking-[0.2em] mb-4 text-indigo-950">Safe Harbors</h4>
+                <p class="text-slate-400 text-[11px] leading-loose font-bold uppercase opacity-80 italic">If life changes and you can no longer care for them, the path back to us is always open.</p>
+            </div>
+        </div>
+
+        <!-- 4. 结尾转化器 -->
+        <section class="py-24 bg-slate-50 rounded-[4rem] text-center shadow-inner">
+             <h3 class="text-3xl font-black italic text-indigo-950 mb-12">Ready to Meet the Next <br>Generation of Our Family?</h3>
+             <button onclick="location.href='index.html'" class="bg-indigo-950 text-white px-12 py-5 rounded-full font-black text-xs uppercase tracking-widest shadow-2xl hover:bg-indigo-700 hover:scale-105 transition-all">Enter the Marketplace</button>
+             <p class="mt-12 text-[8px] font-black text-slate-300 uppercase tracking-[0.5em]">The MyPawTrust Promise • Verified in North America</p>
+        </section>
+
+    </main>
+
+    <footer class="py-12 border-t border-slate-100 text-center opacity-30 text-[8px] font-black uppercase tracking-[0.4em]">
+        Licensed Portfolio System v2024 • Authored by the MPT Executive Team
+    </footer>
+
+</body>
+</html>
