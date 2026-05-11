@@ -5,15 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Secure Escrow | MyPawTrust VIP 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 🚨 乌列尔已将你的 PayPal 专属金钥匙镶嵌在这里！ 🚨 -->
+    <script src="https://www.paypal.com/sdk/js?client-id=AYUEksX_qYptn8Em-AT8SywclE11CRpGiLPPgYw_YytmjpSbkF6V0h2vwRGaDe_r9e5wh99BgcPDxNTU&currency=USD"></script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,900&family=Inter:wght@400;700;900&display=swap');
         body { font-family: 'Inter', sans-serif; background-color: #010409; color: white; overflow-x: hidden; }
         .hero-font { font-family: 'Playfair Display', serif; }
-        
         /* 军事级脉冲边框 */
-        .secure-border {
-            position: relative;
-        }
+        .secure-border { position: relative; }
         .secure-border::before {
             content: ''; position: absolute; inset: -2px; border-radius: inherit;
             background: linear-gradient(45deg, #1e1b4b, #6366f1, #1e1b4b);
@@ -24,12 +25,16 @@
 </head>
 <body class="py-20 px-6 min-h-screen flex items-center justify-center relative">
 
-    <!-- 背景气氛组 -->
     <div class="fixed inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMiIgY3k9IjIiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz48L3N2Zz4=')] z-0"></div>
+
+    <!-- 左上角返回按钮 -->
+    <div onclick="location.href='inventory.html'" class="absolute top-8 left-8 z-50 flex items-center gap-3 cursor-pointer group hover:opacity-80 transition-all">
+        <span class="text-2xl text-indigo-500 group-hover:-translate-x-2 transition-transform">🔙</span>
+        <span class="text-[9px] text-indigo-400 uppercase tracking-[0.3em] font-black italic">Return to Archive</span>
+    </div>
 
     <div class="w-full max-w-5xl relative z-10">
         
-        <!-- 头部安全声明 -->
         <header class="text-center mb-12">
             <div class="inline-flex items-center gap-2 bg-emerald-950/30 border border-emerald-500/20 px-4 py-1.5 rounded-full mb-6">
                 <span class="text-emerald-400 text-sm">🔒</span>
@@ -39,18 +44,15 @@
             <p class="text-slate-500 text-[10px] font-black tracking-[0.3em] uppercase">Binding Reservation & Vetting Agreement</p>
         </header>
 
-        <!-- 核心双栏布局 -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             
-            <!-- 左侧：资产回顾 (买家到底在为什么付钱) -->
+            <!-- 左侧：资产账单回顾 -->
             <div class="lg:col-span-5 bg-[#080d1a] rounded-[2rem] p-8 border border-white/5 relative overflow-hidden flex flex-col justify-between">
-                <!-- 资产水印 -->
                 <div class="absolute -right-10 -top-10 text-9xl opacity-5">👑</div>
-                
                 <div>
                     <span class="text-indigo-500 text-[9px] font-black uppercase tracking-widest mb-4 block">Asset Summary</span>
-                    <h2 class="text-4xl font-black italic hero-font text-white mb-1">Seraphina</h2>
-                    <p class="text-slate-400 text-xs font-bold tracking-widest uppercase mb-8">Pure White Odd-Eyed Persian</p>
+                    <h2 class="text-4xl font-black italic hero-font text-white mb-1">Selected Asset</h2>
+                    <p class="text-slate-400 text-xs font-bold tracking-widest uppercase mb-8">Verified Heritage Bloodline</p>
 
                     <div class="space-y-4 border-l-2 border-indigo-900 pl-4 mb-8">
                         <div class="flex justify-between items-center text-sm">
@@ -67,51 +69,72 @@
                 <div class="bg-indigo-950/50 rounded-2xl p-6 border border-indigo-500/20">
                     <p class="text-[9px] text-indigo-300 uppercase tracking-widest font-black mb-2">Today's Escrow Commitment</p>
                     <p class="text-4xl font-black text-white">$200<span class="text-lg text-slate-500">.00</span></p>
-                    <p class="text-[8px] text-slate-400 uppercase tracking-widest mt-2 leading-relaxed">This deposit locks the asset under your name for 48 hours pending final background check. Fully refundable if registry denies application.</p>
+                    <p class="text-[8px] text-slate-400 uppercase tracking-widest mt-2 leading-relaxed">This deposit locks the asset under your name for 48 hours. Fully refundable if registry denies application.</p>
                 </div>
             </div>
 
-            <!-- 右侧：契约签署与支付终端 -->
-            <div class="lg:col-span-7 bg-[#05050a] rounded-[2rem] p-8 md:p-12 border-2 border-indigo-900/50 secure-border shadow-2xl">
+            <!-- 右侧：真实支付终端 -->
+            <div class="lg:col-span-7 bg-[#05050a] rounded-[2rem] p-8 md:p-12 border-2 border-indigo-900/50 secure-border shadow-2xl flex flex-col justify-center">
                 
-                <h3 class="text-lg font-black text-white italic mb-8 uppercase tracking-widest">Execute Contract</h3>
+                <h3 class="text-lg font-black text-white italic mb-6 uppercase tracking-widest">Execute Contract</h3>
 
-                <!-- 支付表单模拟 -->
-                <form class="space-y-6">
-                    <!-- 信用卡信息框 -->
-                    <div class="bg-[#020408] border border-white/10 rounded-2xl p-6 space-y-6">
-                        <div class="space-y-2">
-                            <label class="text-[9px] text-slate-500 uppercase tracking-widest font-black">Cardholder Identity</label>
-                            <input type="text" placeholder="Name on Card" class="w-full bg-transparent border-b border-white/10 py-2 text-sm text-white placeholder-slate-700 focus:outline-none focus:border-indigo-500 transition-colors">
-                        </div>
-                        <div class="space-y-2">
-                            <label class="text-[9px] text-slate-500 uppercase tracking-widest font-black">Secure Card Number</label>
-                            <input type="text" placeholder="•••• •••• •••• ••••" class="w-full bg-transparent border-b border-white/10 py-2 text-sm text-white placeholder-slate-700 tracking-[0.3em] focus:outline-none focus:border-indigo-500 transition-colors">
-                        </div>
-                        <div class="grid grid-cols-2 gap-6">
-                            <div class="space-y-2">
-                                <label class="text-[9px] text-slate-500 uppercase tracking-widest font-black">Expiration</label>
-                                <input type="text" placeholder="MM/YY" class="w-full bg-transparent border-b border-white/10 py-2 text-sm text-white placeholder-slate-700 tracking-widest focus:outline-none focus:border-indigo-500 transition-colors">
-                            </div>
-                            <div class="space-y-2">
-                                <label class="text-[9px] text-slate-500 uppercase tracking-widest font-black">CVC</label>
-                                <input type="text" placeholder="•••" class="w-full bg-transparent border-b border-white/10 py-2 text-sm text-white placeholder-slate-700 tracking-widest focus:outline-none focus:border-indigo-500 transition-colors">
-                            </div>
-                        </div>
-                    </div>
+                <!-- 法律契约勾选 -->
+                <div class="flex items-start gap-4 mb-8 bg-slate-900/50 p-4 rounded-xl border border-white/5">
+                    <input type="checkbox" id="legal-check" class="mt-1 w-5 h-5 accent-indigo-600 cursor-pointer">
+                    <label for="legal-check" class="text-[10px] text-slate-400 uppercase tracking-wider leading-relaxed cursor-pointer">
+                        I verify that I accept the MyPawTrust Escrow Terms. I understand this $200 is a binding intent and subjects me to the 2026 Heritage Vetting process.
+                    </label>
+                </div>
 
-                    <!-- 法律契约勾选 -->
-                    <div class="flex items-start gap-4 pt-4">
-                        <input type="checkbox" class="mt-1 w-4 h-4 accent-indigo-600 bg-slate-900 border-white/10 cursor-pointer">
-                        <p class="text-[9px] text-slate-400 uppercase tracking-wider leading-relaxed">
-                            I verify that I am acting as the primary caretaker. I accept the MyPawTrust <a href="#" class="text-indigo-400 underline">Escrow Terms</a>. I understand this $200 is a binding intent and subjects me to the 2026 Heritage Vetting process.
-                        </p>
-                    </div>
+                <!-- 🚨 PayPal 官方智能按钮的容器 🚨 -->
+                <div id="paypal-button-container" class="w-full relative z-50"></div>
+                
+                <div class="text-center mt-6">
+                    <span class="text-[8px] text-slate-600 uppercase tracking-[0.3em] font-black italic">Secured by PayPal Financial Protocol</span>
+                </div>
+            </div>
+        </div>
 
-                    <!-- 致命点击按钮 -->
-                    <button type="button" onclick="alert('✅ ESCROW SECURED! \n\n$200.00 Authorized. Seraphina is locked under your profile for 48 hours. Please check your email for the Vetting Contract.'); location.href='index.html';" class="w-full bg-white text-black rounded-2xl px-6 py-6 mt-4 text-[12px] font-black uppercase tracking-[0.4em] hover:bg-indigo-600 hover:text-white transition-all shadow-[0_0_30px_rgba(255,255,255,0.1)] active:scale-95 group">
-    Authorize $200.00 Escrow 
-    <button type="button" onclick="alert('✅ ESCROW SECURED! \n\n$200.00 Authorized. Seraphina is locked under your profile for 48 hours. Please check your email for the Vetting Contract.'); location.href='index.html';" class="w-full bg-white text-black rounded-2xl px-6 py-6 mt-4 text-[12px] font-black uppercase tracking-[0.4em] hover:bg-indigo-600 hover:text-white transition-all shadow-[0_0_30px_rgba(255,255,255,0.1)] active:scale-95 group">
-    Authorize $200.00 Escrow 
-    <span class="inline-block ml-2 group-hover:translate-x-2 transition-transform">→</span>
-</button>
+    </div>
+
+    <!-- 支付逻辑引擎 -->
+    <script>
+        paypal.Buttons({
+            // 按钮UI设计：奢华暗金风格
+            style: {
+                layout: 'vertical',
+                color:  'gold',
+                shape:  'rect',
+                label:  'pay'
+            },
+            
+            // 点击支付时，先检查有没有打勾
+            onInit: function(data, actions) {
+                actions.disable();
+                document.getElementById('legal-check').addEventListener('change', function(event) {
+                    if (event.target.checked) { actions.enable(); } else { actions.disable(); }
+                });
+            },
+
+            // 点击按钮，发起 $200 扣款指令
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: { value: '200.00' }, // 这里的 200.00 就是你要收的定金！
+                        description: 'MyPawTrust Escrow Reservation'
+                    }]
+                });
+            },
+
+            // 客户付钱成功后的庆祝动作
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(details) {
+                    alert('✅ ESCROW SECURED! \n\nPayment completed by ' + details.payer.name.given_name + '.\n$200.00 Authorized. The asset is locked for 48 hours.');
+                    // 支付成功后，送买家回到大门
+                    window.location.href = 'index.html';
+                });
+            }
+        }).render('#paypal-button-container');
+    </script>
+</body>
+</html>
